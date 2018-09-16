@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
         color: '#FFFAE5'
     },
     subTitle: {
+        fontFamily: 'monospace',
         color: '#FFFAE5'
     },
     buttons: {
