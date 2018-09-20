@@ -2,10 +2,14 @@ import { createStackNavigator } from 'react-navigation';
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 import Home from '../screens/home';
+import FindARide from '../screens/find-a-ride';
+import PostARide from '../screens/post-a-ride';
 import MyListings from '../screens/my-listings';
 
 const StackNavigator = createStackNavigator ({
     Home: { screen: Home },
+    FindARide: { screen: FindARide },
+    PostARide: { screen: PostARide },
     MyListings: { screen: MyListings}
 },
 {

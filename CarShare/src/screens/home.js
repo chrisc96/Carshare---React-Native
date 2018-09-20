@@ -2,6 +2,17 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, Button} from 'react-native';
 
 export default class Home extends Component {
+  goToFindARide() {
+    this.props.navigation.navigate('FindARide');
+  }
+    
+  goToPostARide() {
+    this.props.navigation.navigate('PostARide');
+  }
+  goToMyListings() {
+    this.props.navigation.navigate('MyListings');
+  }
+
   render() {
     return (
         <View style={styles.home}>
@@ -10,17 +21,13 @@ export default class Home extends Component {
             <Text style={styles.subTitle}>Find and Share your rides!</Text>
             <View style={styles.buttons}>
                 <View style={styles.button}>
-                    <Button title="Find a ride" color='limegreen'/>
+                    <Button title="Find a ride" color='limegreen' onPress={() => this.goToFindARide()}/>
                 </View>
                 <View style={styles.button}>
-                    <Button title="Post a ride" color='red'/>
+                    <Button title="Post a ride" color='red' onPress={() => this.goToPostARide()}/>
                 </View>
                 <View style={styles.button}>
-                    <Button title="View my listings" color='dodgerblue'
-                        onPress={() =>
-                            this.props.navigation.navigate('MyListings')
-                        }
-                    />
+                    <Button title="View my listings" color='dodgerblue' onPress={() => this.goToMyListings()}/>
                 </View>
             </View>
         </View>
