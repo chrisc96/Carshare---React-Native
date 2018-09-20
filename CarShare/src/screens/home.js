@@ -16,7 +16,11 @@ export default class Home extends Component {
                     <Button title="Post a ride" color='red'/>
                 </View>
                 <View style={styles.button}>
-                    <Button title="View my listings" color='dodgerblue'/>
+                    <Button title="View my listings" color='dodgerblue'
+                        onPress={() =>
+                            this.props.navigation.navigate('MyListings')
+                        }
+                    />
                 </View>
             </View>
         </View>
