@@ -5,10 +5,11 @@ export default class Home extends Component {
   goToFindARide() {
     this.props.navigation.navigate('FindARide');
   }
-    
+  
   goToPostARide() {
     this.props.navigation.navigate('PostARide');
   }
+  
   goToMyListings() {
     this.props.navigation.navigate('MyListings');
   }

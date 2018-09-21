@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "88701285742",
+    "firebase_url": "https://swen325carshare.firebaseio.com",
+    "project_id": "swen325carshare",
+    "storage_bucket": "swen325carshare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88701285742:android:2a34bc4138022906",
+        "android_client_info": {
+          "package_name": "com.carshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88701285742-a17e8ug6n43qpr4qhcbeas8afsu4jkv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAddlVIZkNF0WAEKZZNyxKJmyZkq7_LEk0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
