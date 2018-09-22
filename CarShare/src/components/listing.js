@@ -1,29 +1,29 @@
-import React from 'react';
-import { TouchableHighlight, View, Text } from 'react-native';
-export default class Listing extends React.PureComponent {
-    // toggle a todo as completed or not via update()
-    toggleComplete() {
-        this.props.doc.ref.update({
-            complete: !this.props.complete,
-        });
-    }
+import React, {Component} from 'react';
+import { View, Text } from 'react-native';
+
+export default class Listing extends Component {
 
     render() {
         return (
-          <TouchableHighlight
-            onPress={() => this.toggleComplete()}
-          >
-              <View style={{ flex: 1, height: 48, flexDirection: 'row', alignItems: 'center' }}>
-                  <View style={{ flex: 8 }}>
-                      <Text>{this.props.carDocumentID}</Text>
-                  </View>
-                  <View style={{ flex: 2 }}>
-                      {this.props.destination && (
-                          <Text>COMPLETE</Text>
-                      )}
-                  </View>
-              </View>
-          </TouchableHighlight>
-        );
+            <View>
+                <View>
+                    <Text>Departs: {this.props.departureDate} {this.props.departureTime}</Text>
+                </View>
+                <View>
+                    <Text>Destination: {this.props.destination}</Text>
+                </View>
+                <View>
+                    <Text>Meeting point: {this.props.meetingPoint}</Text>
+                </View>
+                <View>
+                    <Text>Seats available: {this.props.seatsAvailable}</Text>
+                </View>
+                <View>
+                    <Text>Storage space: {this.props.storageSpace}</Text>
+                </View>
+                <Text>{"\n"}</Text>
+            </View>
+            
+        )
     }
 }

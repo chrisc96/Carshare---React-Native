@@ -1,62 +1,58 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import firebase from 'react-native-firebase';
 import Listing from '../components/listing';
 
 export default class FindARide extends Component {
   constructor() {
     super();
-    this.ref=firebase.firestore().collection('listings');
-    this.unsubscribe = null;
+    this.firestore = firebase.firestore().collection('listings');
 
     this.state = {
-        listings: [],
-        loading: true
+      listings: []
     }
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate) 
-    }
+    this.firestore.onSnapshot(this.onCollectionUpdate)
+  }
 
-componentWillUnmount() {
-    this.unsubscribe();
-}
-
-  onCollectionUpdate = (querySnapshot) => {
+  onCollectionUpdate = (snapshot) => {
     const listings = [];
-    querySnapshot.forEach((doc) => {
-      const { carDocumentID, destination } = doc.data();
+    snapshot.forEach((firestoreDocument) => {
+      const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, whoWantsToCome, whosComing } = firestoreDocument.data();
+      
       listings.push({
-        key: doc.id,
-        doc, // DocumentSnapshot
-        carDocumentID,
+        key: firestoreDocument.id,
+        firestoreDocument,
+        departureDate,
+        departureTime,
         destination,
+        meetingPoint,
+        seatsAvailable,
+        storageSpace
       });
     });
+    
     this.setState({ 
       listings,
-      loading: false,
    });
   }
 
 
   render() {
-    if (this.state.loading) {
-        return null
-    }
     return (
-        
-        <View>
-            <FlatList
-        data={this.state.listings}
-        renderItem={({ item }) => <Listing {...item} />}
-      />
+        <View style = {styles.listings}>
+          <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />}/>
         </View>
-    );
+      );
   }
 }
 
 const styles = StyleSheet.create({
-
+  listings: {
+    backgroundColor: 'white',
+    flex: 1,
+    justifyContent: 'center'
+  }
 });
