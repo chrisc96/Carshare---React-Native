@@ -9,8 +9,9 @@
   "dependencies": {
     "react": "16.5.0",
     "react-native": "0.57.0",
-    "react-native-elements": "^0.19.1",
     "react-native-cli": "^2.0.1",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-elements": "^0.19.1",
     "react-native-firebase": "^5.0.0-rc4",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.16.0",
