@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component} from '../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react';
 import {View, Button} from 'react-native';
 import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
 import firebase from 'react-native-firebase';
-import DatePicker from 'react-native-datepicker';
+import DatePicker from '../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-native-datepicker';
 import styles from './post-a-ride-styles';
 
 export default class PostARide extends Component {
@@ -48,7 +48,7 @@ export default class PostARide extends Component {
           <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})}/>
           
           <FormLabel>No. Seats Available:</FormLabel>
-          <FormInput value={this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'/>
+          <FormInput value={'' + this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'/>
 
           <FormLabel>Meeting Place:</FormLabel>
           <FormInput value={this.state.meetingPoint} onChangeText={text => this.setState({meetingPoint: text})}/>

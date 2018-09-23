@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component} from '../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react';
 import {View, FlatList} from 'react-native';
 import firebase from 'react-native-firebase';
 import styles from './find-a-ride-styles'
-
 import Listing from '../../components/Listing/listing';
 
 export default class FindARide extends Component {
