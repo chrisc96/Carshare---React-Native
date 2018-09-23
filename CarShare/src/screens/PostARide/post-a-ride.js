@@ -1,8 +1,8 @@
-import React, {Component} from '../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react';
+import React, {Component} from 'react';
 import {View, Button} from 'react-native';
 import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
 import firebase from 'react-native-firebase';
-import DatePicker from '../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-native-datepicker';
+import DatePicker from 'react-native-datepicker';
 import styles from './post-a-ride-styles';
 
 export default class PostARide extends Component {

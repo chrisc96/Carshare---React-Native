@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Image, Button} from 'react-native';
-import styles from './home-styles'
+import styles from './home-styles';
+import firebase from 'react-native-firebase';
 
 export default class Home extends Component {
   goToFindARide() {
@@ -8,11 +9,19 @@ export default class Home extends Component {
   }
   
   goToPostARide() {
-    this.props.navigation.navigate('PostARide');
+    if(firebase.auth().currentUser) {
+        this.props.navigation.navigate('PostARide');
+    } else {
+        this.props.navigation.navigate('Login', { toPage: 'PostARide'})
+    }
   }
   
   goToMyListings() {
-    this.props.navigation.navigate('MyListings');
+    if(firebase.auth().currentUser) {
+        this.props.navigation.navigate('MyListings');
+    } else {
+        this.props.navigation.navigate('Login', { toPage: 'MyListings'})
+    }
   }
 
   render() {

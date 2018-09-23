@@ -5,10 +5,11 @@ import firebase from 'react-native-firebase';
 import styles from './sign-up-styles'
 
 export default class SignUp extends Component {
-    constructor() {
+    constructor(props) {
         super();
         this.firestoreUsers = firebase.firestore().collection('users');
-    
+        this.pageToGoTo = props.navigation.state.params.toPage;
+
         this.state = {
             email: '',
             password: '',
@@ -18,7 +19,7 @@ export default class SignUp extends Component {
         }
     }
 
-    signUp = () => {
+    signUp() {
         firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
             .then((response) => {
                 this.firestoreUsers.doc(response.user.uid).set({
@@ -27,6 +28,7 @@ export default class SignUp extends Component {
                     contactNum: this.state.contactNum
                 })
             })
+            .then(this.props.navigation.navigate(this.pageToGoTo))
             .catch(error => {
 
             });
@@ -50,7 +52,7 @@ export default class SignUp extends Component {
             <FormLabel>Contact number:</FormLabel>
             <FormInput value={this.state.contactNum} onChangeText={text => this.setState({ contactNum: text })}/>
             
-            <Button title="Sign Up" onPress={this.signUp} />
+            <Button title="Sign Up" onPress={() => this.signUp()} />
           </View>
         )
     }

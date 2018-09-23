@@ -6,12 +6,16 @@ import Home from '../../screens/Home/home';
 import FindARide from '../../screens/FindARide/find-a-ride';
 import PostARide from '../../screens/PostARide/post-a-ride';
 import MyListings from '../../screens/MyListings/my-listings';
+import Login from '../../screens/Login/login';
+import SignUp from '../../screens/SignUp/sign-up';
 
 const StackNavigator = createStackNavigator ({
     Home: { screen: Home },
     FindARide: { screen: FindARide },
     PostARide: { screen: PostARide },
-    MyListings: { screen: MyListings}
+    MyListings: { screen: MyListings},
+    Login: { screen: Login },
+    SignUp: { screen: SignUp }
 },
 {
     navigationOptions: {

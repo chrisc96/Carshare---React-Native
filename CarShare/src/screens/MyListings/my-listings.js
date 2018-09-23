@@ -9,7 +9,8 @@ import Listing from '../../components/Listing/listing';
 export default class MyListings extends Component {
   constructor() {
     super();
-    this.firestoreListings = firebase.firestore().collection('listings').where('userDocumentID', '==', 'ihurClUu4MTSGMeqIjUUiQ9klLe2');
+    console.log(firebase.auth().currentUser.uid)
+    this.firestoreListings = firebase.firestore().collection('listings').where('userDocumentID', '==', firebase.auth().currentUser.uid);
 
     this.state = {
       listings: []
