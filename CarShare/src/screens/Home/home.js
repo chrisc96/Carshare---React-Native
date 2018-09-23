@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
-import { View, Text, Image, Button } from 'react-native';
-import styles from './home-styles'
+import React, {Component} from 'react';
+import {View, Text, Image, Button} from 'react-native';
+import styles from './home-styles';
+import firebase from 'react-native-firebase';
 
 export default class Home extends Component {
-
-    static navigationOptions = {
-        header: null // Don't show header
-    }
-
-    goToFindARide() {
-        this.props.navigation.navigate('FindARide');
-    }
-
-    goToPostARide() {
+  static navigationOptions = {
+      header: null // Don't show header
+  }  
+  goToFindARide() {
+      this.props.navigation.navigate('FindARide');
+  }
+  
+  goToPostARide() {
+    if(firebase.auth().currentUser) {
         this.props.navigation.navigate('PostARide');
+    } else {
+        this.props.navigation.navigate('Login', { toPage: 'PostARide'})
     }
-
-    goToMyListings() {
+  }
+  
+  goToMyListings() {
+    if(firebase.auth().currentUser) {
         this.props.navigation.navigate('MyListings');
+    } else {
+        this.props.navigation.navigate('Login', { toPage: 'MyListings'})
     }
+  }
 
     render() {
         return (

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { View, Button, Text } from 'react-native';
-import { FormLabel, FormInput, CheckBox } from 'react-native-elements';
+import React, {Component} from 'react';
+import {View, Button} from 'react-native';
+import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
 import firebase from 'react-native-firebase';
-import styles from './post-a-ride-styles'
 import { PostARideHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import DatePicker from 'react-native-datepicker';
+import styles from './post-a-ride-styles';
 
 export default class PostARide extends Component {
 
@@ -54,7 +54,7 @@ export default class PostARide extends Component {
 
   render() {
     return (
-        <View style = {styles.listings}>
+        <View style = {styles.form}>
           <FormLabel>Space for bags?</FormLabel>
           <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})}/>
           
