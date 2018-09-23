@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import firebase from 'react-native-firebase';
 import styles from './find-a-ride-styles'
 import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
+import { listingContains } from '../../config/utils'
 import Listing from '../../components/Listing/listing';
 import { FindARideHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
@@ -20,12 +21,15 @@ export default class FindARide extends Component {
 
   constructor(props) {
     super(props);
-    this.search = React.createRef();
+
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
 
     this.state = {
-      listings: []
+      listings: [],
+      filteredData: [],
+      searchBarEmpty: true,
+      noData: false
     }
   }
 
@@ -34,11 +38,11 @@ export default class FindARide extends Component {
   }
 
   onCollectionUpdate = (snapshot) => {
-    const listings = [];
+    const listingsFromDB = [];
     snapshot.forEach((firestoreDocument) => {
       const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, whoWantsToCome, whosComing } = firestoreDocument.data();
 
-      listings.push({
+      listingsFromDB.push({
         key: firestoreDocument.id,
         firestoreDocument,
         departureDate,
@@ -51,12 +55,41 @@ export default class FindARide extends Component {
     });
 
     this.setState({
-      listings,
+      listings: listingsFromDB,
+      filteredData: listingsFromDB
     });
   }
 
   searchBarChanged(inputSearch) {
-    
+    let searchValue = inputSearch.toLowerCase();
+    if (!searchValue || searchValue === undefined || searchValue === "") {
+      this.setState({
+        searchBarEmpty: true
+      })
+      return;
+    }
+    else {
+      this.setState({
+        searchBarEmpty: false
+      })
+    }
+
+    const data = _.filter(this.state.listings, listing => {
+      return listingContains(listing, searchValue);
+    })
+
+    if (data.length === 0) {
+      this.setState({
+        noData: true,
+        filteredData: []
+      })
+    }
+    else {
+      this.setState({
+        noData: false,
+        filteredData: data
+      })
+    }
   }
 
   render() {
@@ -64,7 +97,7 @@ export default class FindARide extends Component {
       <View style={styles.container}>
 
         <SearchBar
-          onChangeText={this.onChangeTextDelayed}
+          onChangeText={this.onChangeTextDelayed.bind(this)}
           placeholder='Search Listings'
           containerStyle={{
             backgroundColor: "#FFF",
@@ -81,8 +114,12 @@ export default class FindARide extends Component {
         />
 
         <View style={styles.listings}>
-          {}
-          <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} />
+          {this.state.searchBarEmpty ?
+            <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />}/> :
+            this.state.noData ? 
+              <Text>No Listings Found</Text> :
+              <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />}/>
+          }
         </View>
       </View>
     );

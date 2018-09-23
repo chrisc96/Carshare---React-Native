@@ -5,7 +5,7 @@ import firebase from 'react-native-firebase';
 import styles from './post-a-ride-styles'
 import { PostARideHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
-import DatePicker from '../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-native-datepicker';
+import DatePicker from 'react-native-datepicker';
 
 export default class PostARide extends Component {
 
