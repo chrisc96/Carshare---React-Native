@@ -1,7 +1,7 @@
 # Carshare-React-Native
 
 * CarShare helps people to locate other people wanting to carpool.
-* We're using AngularJS, Typescript and SASS all encompassed by the Ionic framework. Also using Firebase and some Web APIs.
+* We're using React-Native, Firebase and some Web APIs.
 
 ## Current Progress
 
