@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default styles = StyleSheet.create({
     home: {
@@ -21,5 +22,10 @@ export default styles = StyleSheet.create({
     },
     button: {
         paddingVertical: 8
+    },
+    logoImg: {
+        width: 180,
+        height: 180,
+        marginBottom: 10
     }
 });

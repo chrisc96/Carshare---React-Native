@@ -1,10 +1,8 @@
-import {StyleSheet} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-export default styles = StyleSheet.create({
-    listings: {
-      backgroundColor: 'white',
-      flex: 1,
-      justifyContent: 'center'
-    }
-  });
-  
+export default styles = EStyleSheet.create({
+  listings: {
+    flex: 1,
+    justifyContent: 'center'
+  }
+});

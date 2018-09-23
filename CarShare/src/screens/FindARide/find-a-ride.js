@@ -1,11 +1,22 @@
-import React, {Component} from 'react';
-import {View, FlatList} from 'react-native';
+import React, { Component } from 'react';
+import { View, FlatList } from 'react-native';
 import firebase from 'react-native-firebase';
 import styles from './find-a-ride-styles'
 
 import Listing from '../../components/Listing/listing';
+import { FindARideHeaderTitle } from './../../config/constants'
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 
 export default class FindARide extends Component {
+
+  static navigationOptions = {
+    headerTitle: FindARideHeaderTitle,
+    headerTintColor: headerTextColour,
+    headerTitleStyle: {
+      fontWeight: normalFontWeight,
+    }
+  }
+
   constructor() {
     super();
     this.firestoreListings = firebase.firestore().collection('listings');
@@ -24,7 +35,7 @@ export default class FindARide extends Component {
     const listings = [];
     snapshot.forEach((firestoreDocument) => {
       const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, whoWantsToCome, whosComing } = firestoreDocument.data();
-      
+
       listings.push({
         key: firestoreDocument.id,
         firestoreDocument,
@@ -36,18 +47,18 @@ export default class FindARide extends Component {
         storageSpace
       });
     });
-    
-    this.setState({ 
+
+    this.setState({
       listings,
-   });
+    });
   }
 
 
   render() {
     return (
-        <View style = {styles.listings}>
-          <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />}/>
-        </View>
-      );
+      <View style={styles.listings}>
+        <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} />
+      </View>
+    );
   }
 }
