@@ -6,7 +6,8 @@ import Listing from '../components/listing';
 export default class FindARide extends Component {
   constructor() {
     super();
-    this.firestore = firebase.firestore().collection('listings');
+    this.firestoreListings = firebase.firestore().collection('listings');
+    console.log(this.firestoreListings)
 
     this.state = {
       listings: []
@@ -14,7 +15,7 @@ export default class FindARide extends Component {
   }
 
   componentDidMount() {
-    this.firestore.onSnapshot(this.onCollectionUpdate)
+    this.firestoreListings.onSnapshot(this.onCollectionUpdate)
   }
 
   onCollectionUpdate = (snapshot) => {
