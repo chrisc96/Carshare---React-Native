@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {View, Button} from 'react-native';
 import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
 import firebase from 'react-native-firebase';
+import { PostARideHeaderTitle } from './../../config/constants'
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import DatePicker from 'react-native-datepicker';
-import { PostARideHeaderTitle } from './../../config/constants';
-import { headerTextColour, normalFontWeight } from '../../config/global-styles';
 import styles from './post-a-ride-styles';
 
 export default class PostARide extends Component {
