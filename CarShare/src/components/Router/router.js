@@ -1,10 +1,11 @@
 import { createStackNavigator } from 'react-navigation';
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
-import Home from '../screens/home';
-import FindARide from '../screens/find-a-ride';
-import PostARide from '../screens/post-a-ride';
-import MyListings from '../screens/my-listings';
+import styles from './router-styles'
+
+import Home from '../../screens/Home/home';
+import FindARide from '../../screens/FindARide/find-a-ride';
+import PostARide from '../../screens/PostARide/post-a-ride';
+import MyListings from '../../screens/MyListings/my-listings';
 
 const StackNavigator = createStackNavigator ({
     Home: { screen: Home },
@@ -29,9 +30,3 @@ export default class Router extends Component {
       )
     }
 }
-
-const styles = StyleSheet.create({
-    stackNavigator: {
-        backgroundColor: 'transparent'
-    }
-});

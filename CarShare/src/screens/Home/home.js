@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Image, Button} from 'react-native';
+import {View, Text, Image, Button} from 'react-native';
+import styles from './home-styles'
 
 export default class Home extends Component {
   goToFindARide() {
@@ -17,7 +18,7 @@ export default class Home extends Component {
   render() {
     return (
         <View style={styles.home}>
-            <Image source={require('../assets/carLogo.png')}/>
+            <Image source={require('../../assets/carLogo.png')}/>
             <Text style={styles.title}>CarShare</Text>
             <Text style={styles.subTitle}>Find and Share your rides!</Text>
             <View style={styles.buttons}>
@@ -35,27 +36,3 @@ export default class Home extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    home: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    title: {
-        fontFamily: 'cursive',
-        fontSize: 40,
-        color: '#FFFAE5'
-    },
-    subTitle: {
-        fontFamily: 'monospace',
-        color: '#FFFAE5'
-    },
-    buttons: {
-        width: '70%',
-        marginTop: 30
-    },
-    button: {
-        paddingVertical: 8
-    }
-});

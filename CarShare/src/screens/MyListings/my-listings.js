@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
 import firebase from 'react-native-firebase';
-import Listing from '../components/listing';
+import {View, Text, FlatList} from 'react-native';
+
+import styles from './my-listings-styles'
+
+import Listing from '../../components/Listing/listing';
 
 export default class MyListings extends Component {
   constructor() {
@@ -48,11 +51,3 @@ export default class MyListings extends Component {
       );
   }
 }
-
-const styles = StyleSheet.create({
-  listings: {
-    backgroundColor: 'white',
-    flex: 1,
-    justifyContent: 'center'
-  }
-});

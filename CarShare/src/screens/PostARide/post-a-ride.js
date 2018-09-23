@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Button, Text} from 'react-native';
 import { FormLabel, FormInput } from 'react-native-elements';
 import firebase from 'react-native-firebase';
-import Listing from '../components/listing';
+import styles from './post-a-ride-styles'
 
 export default class PostARide extends Component {
   constructor() {
@@ -42,11 +42,3 @@ export default class PostARide extends Component {
       );
   }
 }
-
-const styles = StyleSheet.create({
-  listings: {
-    backgroundColor: 'white',
-    flex: 1,
-    justifyContent: 'center'
-  }
-});
