@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
+import styles from './post-a-ride-styles'
 
 export default class PostARide extends Component {
   render() {
@@ -10,7 +11,3 @@ export default class PostARide extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-
-});

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import firebase from 'react-native-firebase';
-import Listing from '../components/listing';
+import styles from './find-a-ride-styles'
+
+import Listing from '../../components/Listing/listing';
 
 export default class FindARide extends Component {
   constructor() {
@@ -48,11 +50,3 @@ export default class FindARide extends Component {
       );
   }
 }
-
-const styles = StyleSheet.create({
-  listings: {
-    backgroundColor: 'white',
-    flex: 1,
-    justifyContent: 'center'
-  }
-});

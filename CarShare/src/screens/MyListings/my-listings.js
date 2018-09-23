@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
+import styles from './my-listings-styles'
 
 export default class MyListings extends Component {
   render() {
@@ -11,6 +12,4 @@ export default class MyListings extends Component {
   }
 }
 
-const styles = StyleSheet.create({
 
-});

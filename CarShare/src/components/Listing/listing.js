@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
+import styles from './listing-styles'
 
 export default class Listing extends Component {
 
@@ -23,7 +24,6 @@ export default class Listing extends Component {
                 </View>
                 <Text>{"\n"}</Text>
             </View>
-            
         )
     }
 }

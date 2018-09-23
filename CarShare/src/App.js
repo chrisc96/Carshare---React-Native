@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, ImageBackground} from 'react-native';
-import Router from './components/router';
+import Router from './components/Router/router';
+import styles from './app-styles'
 
 export default class App extends Component {
   render() {
@@ -13,13 +14,3 @@ export default class App extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  bgImage: {
-    width: '100%',
-    height: '100%'
-  }
-});
