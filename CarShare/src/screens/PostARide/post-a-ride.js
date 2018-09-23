@@ -5,6 +5,7 @@ import firebase from 'react-native-firebase';
 import styles from './post-a-ride-styles'
 import { PostARideHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
+import DatePicker from '../../../../../../AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-native-datepicker';
 
 export default class PostARide extends Component {
 
@@ -45,31 +46,34 @@ export default class PostARide extends Component {
     });
   }
 
+  convertToNum(text) {
+    var text = text.replace(/\D/g,'');
+    var number = parseInt(text, 10)
+    this.setState({noSeats: number})
+  }
+
   render() {
     return (
         <View style = {styles.listings}>
           <FormLabel>Space for bags?</FormLabel>
-          <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})} />
+          <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})}/>
           
           <FormLabel>No. Seats Available:</FormLabel>
-          
+          <FormInput value={'' + this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'/>
 
           <FormLabel>Meeting Place:</FormLabel>
-          <FormInput name="meetingPoint" value={this.state.meetingPoint} onChangeText={text => this.setState({meetingPoint: text})}/>
+          <FormInput value={this.state.meetingPoint} onChangeText={text => this.setState({meetingPoint: text})}/>
 
           <FormLabel>Destination:</FormLabel>
-          <FormInput name="destination" value={this.state.destination} onChangeText={text => this.setState({destination: text})}/>
+          <FormInput value={this.state.destination} onChangeText={text => this.setState({destination: text})}/>
 
           <FormLabel>Departure Date:</FormLabel>
-          <FormInput name="departureDate" value={this.state.departureDate} onChangeText={text => this.setState({departureDate: text})}/>
+          <DatePicker date={this.state.departureDate} mode="date" format="DD-MM-YYYY" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(date) => {this.setState({departureDate: date})}}/>
 
           <FormLabel>Departure Time:</FormLabel>
-          <FormInput name="departureTime" value={this.state.departureTime} onChangeText={text => this.setState({departureTime: text})}/>
+          <DatePicker date={this.state.departureTime} mode="time" format="H:MM" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(time) => {this.setState({departureTime: time})}} is24Hour={true}/>
 
-          <Button
-            title={'Submit'}
-            onPress={() => this.addListing()}
-          />
+          <Button title={'Submit'} onPress={() => this.addListing()}/>
         </View>
       );
   }

@@ -4,7 +4,6 @@ import firebase from 'react-native-firebase';
 import styles from './find-a-ride-styles'
 import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
-
 import Listing from '../../components/Listing/listing';
 import { FindARideHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
