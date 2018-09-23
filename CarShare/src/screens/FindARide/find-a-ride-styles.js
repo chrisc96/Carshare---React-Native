@@ -1,6 +1,12 @@
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {StyleSheet} from 'react-native';
 
-export default styles = EStyleSheet.create({
+export default styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    paddingLeft: 15,
+    paddingRight: 15
+  },
   listings: {
     flex: 1,
     justifyContent: 'center'
