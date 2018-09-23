@@ -34,6 +34,7 @@ export default class PostARide extends Component {
 
   addListing() {
     this.firestoreListings.add({
+        userDocumentID: firebase.auth().currentUser.uid,
         timeCreated: firebase.firestore.FieldValue.serverTimestamp(),
         meetingPoint: this.state.meetingPoint,
         destination: this.state.destination,
