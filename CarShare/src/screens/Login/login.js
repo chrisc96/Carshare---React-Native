@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Button} from 'react-native';
 import {FormLabel, FormInput} from 'react-native-elements';
 import firebase from 'react-native-firebase';
+import styles from './login-styles';
 
 export default class Login extends Component {
     constructor(props) {

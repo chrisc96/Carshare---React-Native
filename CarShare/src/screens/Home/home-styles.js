@@ -21,5 +21,10 @@ export default styles = StyleSheet.create({
     },
     button: {
         paddingVertical: 8
+    },
+    logoImg: {
+        width: 180,
+        height: 180,
+        marginBottom: 10
     }
 });

@@ -3,9 +3,20 @@ import {View, Button} from 'react-native';
 import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import DatePicker from 'react-native-datepicker';
+import { PostARideHeaderTitle } from './../../config/constants';
+import { headerTextColour, normalFontWeight } from '../../config/global-styles';
 import styles from './post-a-ride-styles';
 
 export default class PostARide extends Component {
+
+  static navigationOptions = {
+    title: PostARideHeaderTitle,
+    headerTintColor: headerTextColour,
+    headerTitleStyle: {
+      fontWeight: normalFontWeight,
+    }
+  }
+
   constructor() {
     super();
     this.firestoreListings = firebase.firestore().collection('listings');
@@ -43,7 +54,7 @@ export default class PostARide extends Component {
 
   render() {
     return (
-        <View style = {styles.listings}>
+        <View style = {styles.form}>
           <FormLabel>Space for bags?</FormLabel>
           <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})}/>
           
