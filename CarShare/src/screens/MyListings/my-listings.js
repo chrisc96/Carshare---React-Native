@@ -31,24 +31,32 @@ export default class MyListings extends Component {
   }
 
   onCollectionUpdate = (snapshot) => {
-    const listings = [];
+    const listingsFromDB = [];
     snapshot.forEach((firestoreDocument) => {
-      const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, whoWantsToCome, whosComing } = firestoreDocument.data();
+      const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, carDocumentID, whoWantsToCome, whosComing } = firestoreDocument.data();
 
-      listings.push({
-        key: firestoreDocument.id,
-        firestoreDocument,
-        departureDate,
-        departureTime,
-        destination,
-        meetingPoint,
-        seatsAvailable,
-        storageSpace
-      });
-    });
+      firebase.firestore().doc('cars/' + carDocumentID).onSnapshot((carDocument) => {
+        if (!carDocument.data()) return;
+        const { make, model, year } = carDocument.data();
 
-    this.setState({
-      listings,
+        listingsFromDB.push({
+          key: firestoreDocument.id,
+          firestoreDocument,
+          departureDate,
+          departureTime,
+          destination,
+          meetingPoint,
+          seatsAvailable,
+          storageSpace,
+          make,
+          model,
+          year
+        });
+        
+        this.setState({
+          listings: listingsFromDB
+        });
+      })
     });
   }
 

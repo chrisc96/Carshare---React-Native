@@ -42,11 +42,11 @@ export default class FindARide extends Component {
     snapshot.forEach((firestoreDocument) => {
       const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, carDocumentID, userDocumentID, whoWantsToCome, whosComing } = firestoreDocument.data();
       
-      firebase.firestore().doc('cars/' + carDocumentID).onSnapshot(function(carDocument) {
+      firebase.firestore().doc('cars/' + carDocumentID).onSnapshot((carDocument) => {
         if (!carDocument.data()) return;
         const { make, model, year } = carDocument.data();
 
-        firebase.firestore().doc('users/' + userDocumentID).onSnapshot(function(userDocument) {
+        firebase.firestore().doc('users/' + userDocumentID).onSnapshot((userDocument) => {
           if (!userDocument.data()) return;
           const { firstName, lastName, contactNum } = userDocument.data();
           
@@ -66,13 +66,12 @@ export default class FindARide extends Component {
             lastName,
             contactNum
           });
+
+          this.setState({
+            listings: listingsFromDB
+          });
         })
       })
-    });
-
-    this.setState({
-      listings: listingsFromDB,
-      filteredData: listingsFromDB
     });
   }
 
