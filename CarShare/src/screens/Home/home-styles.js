@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
         justifyContent: 'center'
     },
     title: {
-        fontFamily: 'cursive',
+        fontFamily: 'ribeye',
         fontSize: 40,
         color: '#FFFAE5'
     },

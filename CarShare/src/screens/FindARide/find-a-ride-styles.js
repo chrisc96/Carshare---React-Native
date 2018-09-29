@@ -7,8 +7,9 @@ export default styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15
   },
-  listings: {
+  noListingsTxt: {
     flex: 1,
-    justifyContent: 'center'
+    flexDirection:'row',
+    alignItems:'center',
   }
 });

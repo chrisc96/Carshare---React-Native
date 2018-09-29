@@ -1,10 +1,21 @@
-import React, {Component} from 'react';
-import {View, Button, Text} from 'react-native';
-import {FormLabel, FormInput} from 'react-native-elements';
+import React, { Component } from 'react';
+import { View, Button, Text } from 'react-native';
+import { FormLabel, FormInput } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import styles from './sign-up-styles'
+import { SignupHeaderTitle } from './../../config/constants'
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 
 export default class SignUp extends Component {
+
+    static navigationOptions = {
+        headerTitle: SignupHeaderTitle,
+        headerTintColor: headerTextColour,
+        headerTitleStyle: {
+            fontWeight: normalFontWeight,
+        }
+    }
+
     constructor(props) {
         super();
         this.firestoreUsers = firebase.firestore().collection('users');
@@ -39,25 +50,25 @@ export default class SignUp extends Component {
 
     render() {
         return (
-          <View style={styles.form}>
-            <FormLabel>Email:</FormLabel>
-            <FormInput value={this.state.email} onChangeText={text => this.setState({ email: text })}/>
+            <View style={styles.form}>
+                <FormLabel>Email:</FormLabel>
+                <FormInput value={this.state.email} onChangeText={text => this.setState({ email: text })} />
 
-            <FormLabel>Password:</FormLabel>
-            <FormInput value={this.state.password} secureTextEntry onChangeText={password => this.setState({ password: password })}/>
+                <FormLabel>Password:</FormLabel>
+                <FormInput value={this.state.password} secureTextEntry onChangeText={password => this.setState({ password: password })} />
 
-            <FormLabel>First name:</FormLabel>
-            <FormInput value={this.state.firstName} onChangeText={text => this.setState({ firstName: text })}/>
+                <FormLabel>First name:</FormLabel>
+                <FormInput value={this.state.firstName} onChangeText={text => this.setState({ firstName: text })} />
 
-            <FormLabel>Last name:</FormLabel>
-            <FormInput value={this.state.lastName} onChangeText={text => this.setState({ lastName: text })}/>
+                <FormLabel>Last name:</FormLabel>
+                <FormInput value={this.state.lastName} onChangeText={text => this.setState({ lastName: text })} />
 
-            <FormLabel>Contact number:</FormLabel>
-            <FormInput value={this.state.contactNum} onChangeText={text => this.setState({ contactNum: text })}/>
-            <Text>{this.state.formErrorText}</Text>
-            
-            <Button title="Sign Up" onPress={() => this.signUp()} />
-          </View>
+                <FormLabel>Contact number:</FormLabel>
+                <FormInput value={this.state.contactNum} onChangeText={text => this.setState({ contactNum: text })} />
+                <Text>{this.state.formErrorText}</Text>
+
+                <Button title="Sign Up" onPress={() => this.signUp()} />
+            </View>
         )
     }
 }

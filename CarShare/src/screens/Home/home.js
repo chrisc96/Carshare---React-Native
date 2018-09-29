@@ -1,44 +1,44 @@
-import React, {Component} from 'react';
-import {View, Text, Image, Button} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Image, Button } from 'react-native';
 import styles from './home-styles';
 import firebase from 'react-native-firebase';
 
 export default class Home extends Component {
-  static navigationOptions = {
-      header: null // Don't show header
-  }  
-
-  goToFindARide() {
-      this.props.navigation.navigate('FindARide');
-  }
-  
-  goToPostARide() {
-    if(firebase.auth().currentUser) {
-        this.props.navigation.navigate('PostARide');
-    } else {
-        this.props.navigation.navigate('Login', { toPage: 'PostARide'})
+    static navigationOptions = {
+        header: null // Don't show header
     }
-  }
-  
-  goToMyListings() {
-    if(firebase.auth().currentUser) {
-        this.props.navigation.navigate('MyListings');
-    } else {
-        this.props.navigation.navigate('Login', { toPage: 'MyListings'})
-    }
-  }
 
-  logout() {
-    firebase.auth().signOut();
-  }
+    goToFindARide() {
+        this.props.navigation.navigate('FindARide');
+    }
+
+    goToPostARide() {
+        if (firebase.auth().currentUser) {
+            this.props.navigation.navigate('PostARide');
+        } else {
+            this.props.navigation.navigate('Login', { toPage: 'PostARide' })
+        }
+    }
+
+    goToMyListings() {
+        if (firebase.auth().currentUser) {
+            this.props.navigation.navigate('MyListings');
+        } else {
+            this.props.navigation.navigate('Login', { toPage: 'MyListings' })
+        }
+    }
+
+    logout() {
+        firebase.auth().signOut();
+    }
 
     render() {
         return (
             <View style={styles.home}>
-                <Image style={styles.logoImg} source={require('../../assets/carLogo.png')} />
+                <Image style={styles.logoImg} source={require('../../assets/imgs/carLogo.png')} />
 
                 <Text style={styles.title}>CarShare</Text>
-                <Text style={styles.subTitle}>Where you come to carpool</Text>
+                <Text style={styles.subTitle}>one stop car pool shop</Text>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
                         <Button title="Find a ride" color='limegreen' onPress={() => this.goToFindARide()} />

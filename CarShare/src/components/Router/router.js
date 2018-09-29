@@ -29,8 +29,8 @@ const StackNavigator = createStackNavigator ({
 
 export default class Router extends Component {
     render() {
-      return (
-          <StackNavigator style={styles.stackNavigator} />
-      )
+        return (
+        <StackNavigator style={styles.stackNavigator} />
+        )
     }
 }

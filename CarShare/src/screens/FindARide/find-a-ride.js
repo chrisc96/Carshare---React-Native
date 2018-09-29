@@ -132,7 +132,7 @@ export default class FindARide extends Component {
           {this.state.searchBarEmpty ?
             <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />}/> :
             this.state.noData ? 
-              <Text>No Listings Found</Text> :
+              <Text style = "styles.noListingsTxt">No listings found by that search</Text> :
               <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />}/>
           }
         </View>

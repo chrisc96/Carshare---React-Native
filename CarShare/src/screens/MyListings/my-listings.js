@@ -52,7 +52,7 @@ export default class MyListings extends Component {
           model,
           year
         });
-        
+
         this.setState({
           listings: listingsFromDB
         });
