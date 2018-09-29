@@ -28,8 +28,8 @@ export default class PostARide extends Component {
       noSeats: 0,
       meetingPoint: '',
       destination: '',
-      departureDate: '',
-      departureTime: '',
+      departureDate: '2018-10-05',
+      departureTime: '07:28',
       cars: [],
       selectedCarID: ''
     }
@@ -122,10 +122,10 @@ export default class PostARide extends Component {
           <FormInput value={this.state.destination} onChangeText={text => this.setState({destination: text})}/>
 
           <FormLabel>Departure Date:</FormLabel>
-          <DatePicker date={this.state.departureDate} mode="date" format="DD-MM-YYYY" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(date) => {this.setState({departureDate: date})}}/>
+          <DatePicker date={this.state.departureDate} mode="date" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(date) => {this.setState({departureDate: date})}}/>
 
           <FormLabel>Departure Time:</FormLabel>
-          <DatePicker date={this.state.departureTime} mode="time" format="H:MM" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(time) => {this.setState({departureTime: time})}} is24Hour={true}/>
+          <DatePicker date={this.state.departureTime} mode="time" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(time) => {this.setState({departureTime: time})}} />
 
           <Button title={'Submit'} onPress={() => this.addListing()}/>
         </View>
