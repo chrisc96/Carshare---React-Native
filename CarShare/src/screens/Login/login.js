@@ -19,7 +19,7 @@ export default class Login extends Component {
 
     login() {
       firebase.auth().signInAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
-        .then(resp => {
+        .then(response => {
             this.props.navigation.pop();
             this.props.navigation.navigate(this.pageToGoTo);
         })

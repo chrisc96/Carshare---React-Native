@@ -40,18 +40,34 @@ export default class FindARide extends Component {
   onCollectionUpdate = (snapshot) => {
     const listingsFromDB = [];
     snapshot.forEach((firestoreDocument) => {
-      const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, whoWantsToCome, whosComing } = firestoreDocument.data();
+      const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, carDocumentID, userDocumentID, whoWantsToCome, whosComing } = firestoreDocument.data();
+      
+      firebase.firestore().doc('cars/' + carDocumentID).onSnapshot(function(carDocument) {
+        if (!carDocument.data()) return;
+        const { make, model, year } = carDocument.data();
 
-      listingsFromDB.push({
-        key: firestoreDocument.id,
-        firestoreDocument,
-        departureDate,
-        departureTime,
-        destination,
-        meetingPoint,
-        seatsAvailable,
-        storageSpace
-      });
+        firebase.firestore().doc('users/' + userDocumentID).onSnapshot(function(userDocument) {
+          if (!userDocument.data()) return;
+          const { firstName, lastName, contactNum } = userDocument.data();
+          
+          listingsFromDB.push({
+            key: firestoreDocument.id,
+            firestoreDocument,
+            departureDate,
+            departureTime,
+            destination,
+            meetingPoint,
+            seatsAvailable,
+            storageSpace,
+            make,
+            model,
+            year,
+            firstName,
+            lastName,
+            contactNum
+          });
+        })
+      })
     });
 
     this.setState({

@@ -10,6 +10,13 @@ export default class Listing extends Component {
         return (
             <View>
                 <View>
+                    <Text>Listed by: {this.props.firstName} {this.props.lastName}</Text>
+                    <Text>Contact number: {this.props.contactNum}</Text>
+                </View>
+                <View>
+                    <Text>Vehicle: {this.props.make} {this.props.model} ({this.props.year})</Text>
+                </View>
+                <View>
                     <Text>Departs: {this.props.departureDate} {this.props.departureTime}</Text>
                 </View>
                 <View>
