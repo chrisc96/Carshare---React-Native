@@ -7,6 +7,7 @@ export default class Home extends Component {
   static navigationOptions = {
       header: null // Don't show header
   }  
+
   goToFindARide() {
       this.props.navigation.navigate('FindARide');
   }
@@ -27,6 +28,10 @@ export default class Home extends Component {
     }
   }
 
+  logout() {
+    firebase.auth().signOut();
+  }
+
     render() {
         return (
             <View style={styles.home}>
@@ -43,6 +48,9 @@ export default class Home extends Component {
                     </View>
                     <View style={styles.button}>
                         <Button title="View my listings" color='dodgerblue' onPress={() => this.goToMyListings()} />
+                    </View>
+                    <View style={styles.button}>
+                        <Button title="Log out" color='black' onPress={() => this.logout()} />
                     </View>
                 </View>
             </View>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Button} from 'react-native';
+import {View, Button, Text} from 'react-native';
 import {FormLabel, FormInput} from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import styles from './sign-up-styles'
@@ -15,7 +15,8 @@ export default class SignUp extends Component {
             password: '',
             firstName: '',
             lastName: '',
-            contactNum: ''
+            contactNum: '',
+            formErrorText: ''
         }
     }
 
@@ -27,10 +28,12 @@ export default class SignUp extends Component {
                     lastName: this.state.lastName,
                     contactNum: this.state.contactNum
                 })
+                this.props.navigation.pop();
+                this.props.navigation.pop();
+                this.props.navigation.navigate(this.pageToGoTo);
             })
-            .then(this.props.navigation.navigate(this.pageToGoTo))
             .catch(error => {
-
+                this.setState({ formErrorText: 'Invalid details, please try again' });
             });
     }
 
@@ -51,6 +54,7 @@ export default class SignUp extends Component {
 
             <FormLabel>Contact number:</FormLabel>
             <FormInput value={this.state.contactNum} onChangeText={text => this.setState({ contactNum: text })}/>
+            <Text>{this.state.formErrorText}</Text>
             
             <Button title="Sign Up" onPress={() => this.signUp()} />
           </View>
