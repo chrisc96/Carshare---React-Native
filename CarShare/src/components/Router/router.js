@@ -8,6 +8,7 @@ import PostARide from '../../screens/PostARide/post-a-ride';
 import MyListings from '../../screens/MyListings/my-listings';
 import Login from '../../screens/Login/login';
 import SignUp from '../../screens/SignUp/sign-up';
+import AddACar from '../../screens/AddACar/add-a-car';
 
 const StackNavigator = createStackNavigator ({
     Home: { screen: Home },
@@ -15,7 +16,8 @@ const StackNavigator = createStackNavigator ({
     PostARide: { screen: PostARide },
     MyListings: { screen: MyListings},
     Login: { screen: Login },
-    SignUp: { screen: SignUp }
+    SignUp: { screen: SignUp },
+    AddACar: { screen: AddACar }
 },
 {
     navigationOptions: {
