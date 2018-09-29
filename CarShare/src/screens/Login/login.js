@@ -71,7 +71,6 @@ export default class Login extends Component {
                         placeholder='Please enter your password...'
                         onChangeText={password => this.setState({ password: password })}
                     />
-                    <FormValidationMessage>{'You must enter a password'}</FormValidationMessage>
 
                     <Text>{this.state.formErrorText}</Text>
 
@@ -93,6 +92,5 @@ export default class Login extends Component {
                 </Card>
             </View>
         )
-
     }
 }
