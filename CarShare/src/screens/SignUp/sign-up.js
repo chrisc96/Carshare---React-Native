@@ -44,7 +44,7 @@ export default class SignUp extends Component {
                     StackActions.reset({
                         index: 0,
                         key: null,
-                        actions:[NavigationActions.navigate({routeName: 'TabStack'})]
+                        actions:[NavigationActions.navigate({routeName: 'LoggedInTabs'})]
                     })
                 )
             })

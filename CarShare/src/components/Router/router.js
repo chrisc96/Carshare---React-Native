@@ -1,11 +1,11 @@
 import { createStackNavigator } from 'react-navigation';
 
-import TabStack from './tab-stack';
+import LoggedInTabs from './logged-in-tabs';
 import LoggedOutStack from './logged-out-stack';
 
 const Router = createStackNavigator ({
     LoggedOutStack: {screen: LoggedOutStack},
-    TabStack: {screen: TabStack}
+    LoggedInTabs: {screen: LoggedInTabs}
 },
 {
     navigationOptions: {
