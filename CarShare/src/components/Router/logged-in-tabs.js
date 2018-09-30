@@ -11,6 +11,7 @@ export const LoggedInTabs = createBottomTabNavigator ({
     FindARide: { 
         screen: FindARide,
         navigationOptions: () => ({
+            title: 'Find a ride',
             tabBarIcon: ({focused, tintColour}) => (
                 <Icon name="search" color={focused ? 'limegreen' : tintColour} size={25} />
             )
@@ -19,6 +20,7 @@ export const LoggedInTabs = createBottomTabNavigator ({
     PostARide: {
         screen: PostARideStack,
         navigationOptions: () => ({
+            title: 'Post a ride',
             tabBarIcon: ({focused, tintColour}) => (
                 <Icon name="add" color={focused ? 'limegreen' : tintColour} size={25} />
             )
@@ -27,6 +29,7 @@ export const LoggedInTabs = createBottomTabNavigator ({
     MyListings: {
         screen: MyListings,
         navigationOptions: () => ({
+            title: 'My listings',
             tabBarIcon: ({focused, tintColour}) => (
                 <Icon name="folder" color={focused ? 'limegreen' : tintColour} size={25} />
             )
