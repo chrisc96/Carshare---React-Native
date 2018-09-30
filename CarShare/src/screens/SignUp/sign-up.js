@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { View, Button, Text } from 'react-native';
 import { FormLabel, FormInput } from 'react-native-elements';
 import firebase from 'react-native-firebase';
-import styles from './sign-up-styles'
-import { SignupHeaderTitle } from './../../config/constants'
-import { headerTextColour, normalFontWeight } from '../../config/global-styles'
+import styles from './sign-up-styles';
+import { SignupHeaderTitle } from './../../config/constants';
+import { headerTextColour, normalFontWeight } from '../../config/global-styles';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 export default class SignUp extends Component {
 
@@ -19,7 +20,6 @@ export default class SignUp extends Component {
     constructor(props) {
         super();
         this.firestoreUsers = firebase.firestore().collection('users');
-        this.pageToGoTo = props.navigation.state.params.toPage;
 
         this.state = {
             email: '',
@@ -39,9 +39,14 @@ export default class SignUp extends Component {
                     lastName: this.state.lastName,
                     contactNum: this.state.contactNum
                 })
-                this.props.navigation.pop();
-                this.props.navigation.pop();
-                this.props.navigation.navigate(this.pageToGoTo);
+                // prevent back button from appearing
+                this.props.navigation.dispatch(
+                    StackActions.reset({
+                        index: 0,
+                        key: null,
+                        actions:[NavigationActions.navigate({routeName: 'TabStack'})]
+                    })
+                )
             })
             .catch(error => {
                 this.setState({ formErrorText: 'Invalid details, please try again' });

@@ -100,20 +100,20 @@ export default class PostARide extends Component {
     });
 
     return (
-        <View style = {styles.form}>
-          <FormLabel>Car to use:</FormLabel>
-          <Picker
-            selectedValue={this.state.selectedCarID}
-            onValueChange={(carID) => this.onChange(carID)}>
-            {carItems}
-            <Picker.Item key={carItems.length} value='Add new car' label='Add new car' />
-          </Picker>
+      <View style = {styles.form}>
+        <FormLabel>Car to use:</FormLabel>
+        <Picker
+          selectedValue={this.state.selectedCarID}
+          onValueChange={(carID) => this.onChange(carID)}>
+          {carItems}
+          <Picker.Item key={carItems.length} value='Add new car' label='Add new car' />
+        </Picker>
 
-          <FormLabel>Space for bags?</FormLabel>
-          <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})}/>
-          
-          <FormLabel>No. Seats Available:</FormLabel>
-          <FormInput value={'' + this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'/>
+        <FormLabel>Space for bags?</FormLabel>
+        <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})}/>
+        
+        <FormLabel>No. Seats Available:</FormLabel>
+        <FormInput value={'' + this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'/>
 
         <FormLabel>No. Seats Available:</FormLabel>
         <FormInput value={'' + this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType='numeric' />
@@ -121,14 +121,11 @@ export default class PostARide extends Component {
         <FormLabel>Meeting Place:</FormLabel>
         <FormInput value={this.state.meetingPoint} onChangeText={text => this.setState({ meetingPoint: text })} />
 
-          <FormLabel>Departure Date:</FormLabel>
-          <DatePicker date={this.state.departureDate} mode="date" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(date) => {this.setState({departureDate: date})}}/>
-
-          <FormLabel>Departure Time:</FormLabel>
-          <DatePicker date={this.state.departureTime} mode="time" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(time) => {this.setState({departureTime: time})}} />
+        <FormLabel>Departure Date:</FormLabel>
+        <DatePicker date={this.state.departureDate} mode="date" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(date) => {this.setState({departureDate: date})}}/>
 
         <FormLabel>Departure Time:</FormLabel>
-        <DatePicker date={this.state.departureTime} mode="time" format="H:MM" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(time) => { this.setState({ departureTime: time }) }} is24Hour={true} />
+        <DatePicker date={this.state.departureTime} mode="time" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(time) => {this.setState({departureTime: time})}} />
 
         <Button title={'Submit'} onPress={() => this.addListing()} />
       </View>

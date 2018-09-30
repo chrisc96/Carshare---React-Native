@@ -110,7 +110,6 @@ export default class FindARide extends Component {
   render() {
     return (
       <View style={styles.container}>
-
         <SearchBar
           onChangeText={this.onChangeTextDelayed.bind(this)}
           placeholder='Search Listings'

@@ -1,27 +1,15 @@
 import { createStackNavigator } from 'react-navigation';
-import React, {Component} from 'react';
-import styles from './router-styles'
 
-import Home from '../../screens/Home/home';
-import FindARide from '../../screens/FindARide/find-a-ride';
-import PostARide from '../../screens/PostARide/post-a-ride';
-import MyListings from '../../screens/MyListings/my-listings';
-import Login from '../../screens/Login/login';
-import SignUp from '../../screens/SignUp/sign-up';
-import AddACar from '../../screens/AddACar/add-a-car';
+import TabStack from './tab-stack';
+import LoggedOutStack from './logged-out-stack';
 
-const StackNavigator = createStackNavigator ({
-    Home: { screen: Home },
-    FindARide: { screen: FindARide },
-    PostARide: { screen: PostARide },
-    MyListings: { screen: MyListings},
-    Login: { screen: Login },
-    SignUp: { screen: SignUp },
-    AddACar: { screen: AddACar }
+const Router = createStackNavigator ({
+    LoggedOutStack: {screen: LoggedOutStack},
+    TabStack: {screen: TabStack}
 },
 {
     navigationOptions: {
-        headerStyle: { backgroundColor: '#75AF74', opacity: 1}
+        header: null
     },
     cardStyle: {
         shadowColor: 'transparent',
@@ -29,10 +17,4 @@ const StackNavigator = createStackNavigator ({
     }
 });
 
-export default class Router extends Component {
-    render() {
-        return (
-        <StackNavigator style={styles.stackNavigator} />
-        )
-    }
-}
+export default Router

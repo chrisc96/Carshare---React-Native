@@ -6,6 +6,7 @@ import styles from './login-styles';
 import { LoginHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import { errorTxtStyles } from '../../config/commonStyles';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 export default class Login extends Component {
 
@@ -20,7 +21,6 @@ export default class Login extends Component {
     constructor(props) {
         super();
         this.firestoreUsers = firebase.firestore().collection('users');
-        this.pageToGoTo = props.navigation.state.params.toPage;
 
         this.state = {
             email: '',
@@ -32,8 +32,14 @@ export default class Login extends Component {
     login() {
         firebase.auth().signInAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
             .then(response => {
-                this.props.navigation.pop();
-                this.props.navigation.navigate(this.pageToGoTo);
+                // prevent back button from appearing
+                this.props.navigation.dispatch(
+                    StackActions.reset({
+                        index: 0,
+                        key: null,
+                        actions:[NavigationActions.navigate({routeName: 'TabStack'})]
+                    })
+                )
             })
             .catch(error => {
                 this.setState({
@@ -44,7 +50,7 @@ export default class Login extends Component {
     }
 
     goToSignUp() {
-        this.props.navigation.navigate('SignUp', { toPage: this.pageToGoTo });
+        this.props.navigation.navigate('SignUp');
     }
 
     render() {
