@@ -1,3 +1,4 @@
 export const errorTxtStyles = {
-    color: 'red'
+    color: 'red',
+    marginTop: 0,
 }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Button, Text } from 'react-native';
-import { FormLabel, FormInput } from 'react-native-elements';
+import { View, Text, ScrollView } from 'react-native';
+import { FormLabel, FormInput, Card, Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import styles from './sign-up-styles';
 import { SignupHeaderTitle } from './../../config/constants';
 import { headerTextColour, normalFontWeight } from '../../config/global-styles';
+import { errorTxtStyles } from '../../config/commonStyles';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 export default class SignUp extends Component {
@@ -27,53 +28,132 @@ export default class SignUp extends Component {
             firstName: '',
             lastName: '',
             contactNum: '',
-            formErrorText: ''
+            signupBtnPressed: false,
+            reqBeingSent: false
         }
     }
 
     signUp() {
-        firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
-            .then((response) => {
-                this.firestoreUsers.doc(response.user.uid).set({
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
-                    contactNum: this.state.contactNum
-                })
-                // prevent back button from appearing
-                this.props.navigation.dispatch(
-                    StackActions.reset({
-                        index: 0,
-                        key: null,
-                        actions:[NavigationActions.navigate({routeName: 'LoggedInTabs'})]
+        this.setState({ signupBtnPressed: true });
+
+        if (this.formValid()) {
+            this.setState({ reqBeingSent: true })
+            firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
+                .then((response) => {
+                    this.setState({ signupBtnPressed: false })
+
+                    this.firestoreUsers.doc(response.user.uid).set({
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        contactNum: this.state.contactNum
                     })
-                )
-            })
-            .catch(error => {
-                this.setState({ formErrorText: 'Invalid details, please try again' });
-            });
+                    // prevent back button from appearing
+                    this.props.navigation.dispatch(
+                        StackActions.reset({
+                            index: 0,
+                            key: null,
+                            actions: [NavigationActions.navigate({ routeName: 'LoggedInTabs' })]
+                        })
+                    )
+                })
+                .catch(error => {
+                    this.setState({ signupBtnPressed: false })
+                    this.setState({ reqBeingSent: false })
+                });
+        }
+    }
+
+    formValid() {
+        return this.state.email.length > 0 &&
+            this.state.password.length > 0 &&
+            this.state.firstName.length > 0 &&
+            this.state.lastName.length > 0 &&
+            this.state.contactNum.length > 0
     }
 
     render() {
         return (
-            <View style={styles.form}>
-                <FormLabel>Email:</FormLabel>
-                <FormInput value={this.state.email} onChangeText={text => this.setState({ email: text })} />
+            <ScrollView>
+                <View style={styles.form}>
+                    <Card
+                        containerStyle={styles.signupCard}
+                        titleStyle={styles.signupCardTitle}
+                        dividerStyle={styles.divider}
+                        title='Sign Up'
+                    >
 
-                <FormLabel>Password:</FormLabel>
-                <FormInput value={this.state.password} secureTextEntry onChangeText={password => this.setState({ password: password })} />
+                        <FormLabel
+                            containerStyle={styles.inputBox}
+                        >
+                            EMAIL
+                    </FormLabel>
+                        <FormInput
+                            value={this.state.email}
+                            containerStyle={styles.inputBox}
+                            placeholder='Please enter your email...'
+                            onChangeText={text => this.setState({ email: text })}
+                        />
+                        <Text
+                            style={[styles.indented, errorTxtStyles]}
+                        >
+                            {this.state.email.length === 0 && this.state.signupBtnPressed ? "Please enter an email" : ""}
+                        </Text>
 
-                <FormLabel>First name:</FormLabel>
-                <FormInput value={this.state.firstName} onChangeText={text => this.setState({ firstName: text })} />
+                        <FormLabel>PASSWORD</FormLabel>
+                        <FormInput
+                            secureTextEntry
+                            value={this.state.password}
+                            placeholder='Please enter your password...'
+                            onChangeText={password => this.setState({ password: password })}
+                        />
+                        <Text style={[styles.indented, errorTxtStyles]}>
+                            {this.state.password.length === 0 && this.state.signupBtnPressed ? "Please enter a password" : ""}
+                        </Text>
 
-                <FormLabel>Last name:</FormLabel>
-                <FormInput value={this.state.lastName} onChangeText={text => this.setState({ lastName: text })} />
 
-                <FormLabel>Contact number:</FormLabel>
-                <FormInput value={this.state.contactNum} onChangeText={text => this.setState({ contactNum: text })} />
-                <Text>{this.state.formErrorText}</Text>
+                        <FormLabel>FIRST NAME</FormLabel>
+                        <FormInput
+                            value={this.state.firstName}
+                            placeholder='Please enter your first name...'
+                            onChangeText={text => this.setState({ firstName: text })}
+                        />
+                        <Text style={[styles.indented, errorTxtStyles]}>
+                            {this.state.firstName.length === 0 && this.state.signupBtnPressed ? "Please enter your first name" : ""}
+                        </Text>
 
-                <Button title="Sign Up" onPress={() => this.signUp()} />
-            </View>
+                        <FormLabel>LAST NAME</FormLabel>
+                        <FormInput
+                            value={this.state.lastName}
+                            placeholder='Please enter your last name...'
+                            onChangeText={text => this.setState({ lastName: text })}
+                        />
+                        <Text style={[styles.indented, errorTxtStyles]}>
+                            {this.state.lastName.length === 0 && this.state.signupBtnPressed ? "Please enter your last name" : ""}
+                        </Text>
+
+                        <FormLabel>CONTACT NUMBER</FormLabel>
+                        <FormInput
+                            value={this.state.contactNum}
+                            placeholder='Please enter your contact number...'
+                            onChangeText={text => this.setState({ contactNum: text })} />
+                        <Text style={[styles.indented, errorTxtStyles]}>
+                            {this.state.password.length === 0 && this.state.signupBtnPressed ? "Please enter a contact number" : ""}
+                        </Text>
+
+                        {this.state.reqBeingSent ?
+                            <Button
+                                loading
+                                buttonStyle={styles.signupBtn}
+                            /> :
+                            <Button
+                                title="SIGN UP"
+                                onPress={() => this.signUp()}
+                                buttonStyle={styles.signupBtn}
+                            />
+                        }
+                    </Card>
+                </View>
+            </ScrollView>
         )
     }
 }

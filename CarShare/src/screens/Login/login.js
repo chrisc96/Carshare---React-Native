@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { FormLabel, FormInput, Card, Button, Icon } from 'react-native-elements';
+import { FormLabel, FormInput, Card, Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import styles from './login-styles';
 import { LoginHeaderTitle } from './../../config/constants'
@@ -32,19 +32,19 @@ export default class Login extends Component {
 
     login() {
         if (this.state.email.length < 1 && this.state.password.length < 1) {
-            this.setState({formErrorText: 'Please enter an email and password'})
+            this.setState({ formErrorText: 'Please enter an email and password' })
             return;
         }
         else if (this.state.email.length < 1) {
-            this.setState({formErrorText: 'Please enter an email'})
+            this.setState({ formErrorText: 'Please enter an email' })
             return;
         }
         else if (this.state.password.length < 1) {
-            this.setState({formErrorText: 'Please enter a password'})
+            this.setState({ formErrorText: 'Please enter a password' })
             return;
         }
         else {
-            this.setState({formErrorText: ''})
+            this.setState({ formErrorText: '' })
             this.setState({ loggedInPressed: true });
         }
 
@@ -80,7 +80,8 @@ export default class Login extends Component {
                     containerStyle={styles.loginCard}
                     titleStyle={styles.loginCardTitle}
                     dividerStyle={styles.divider}
-                    title='Login'>
+                    title='Login'
+                >
 
                     <FormLabel>EMAIL</FormLabel>
                     <FormInput
@@ -97,7 +98,7 @@ export default class Login extends Component {
                         onChangeText={password => this.setState({ password: password })}
                     />
 
-                    <Text style={[(styles.indented), errorTxtStyles]}>
+                    <Text style={[styles.indented, errorTxtStyles]}>
                         {this.state.formErrorText}
                     </Text>
 

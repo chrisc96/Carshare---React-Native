@@ -20,6 +20,7 @@ export default styles = StyleSheet.create({
   },
   divider: {
     display: 'none',
+    margin: 0
   },
   separator: {
     marginTop: 10,
