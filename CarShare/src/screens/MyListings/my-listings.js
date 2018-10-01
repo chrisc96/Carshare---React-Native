@@ -18,7 +18,6 @@ export default class MyListings extends Component {
 
   constructor() {
     super();
-    console.log(firebase.auth().currentUser.uid)
     this.firestoreListings = firebase.firestore().collection('listings').where('userDocumentID', '==', firebase.auth().currentUser.uid);
 
     this.state = {

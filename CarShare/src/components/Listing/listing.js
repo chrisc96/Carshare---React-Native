@@ -4,15 +4,27 @@ import styles from './listing-styles'
 
 export default class Listing extends Component {
 
+    constructor(props) {
+        super();
+        this.userDetails = null;
+
+        if (props.firstName) {
+           this.userDetails = (
+            <View>
+                 <Text>Listed by: {props.firstName} {props.lastName}</Text>
+                 <Text>Contact number: {props.contactNum}</Text>
+             </View>
+            )
+        }
+
+    }
+
     render() {
-        var storageSpaceString = this.props.storageSpace ? 'yes' : 'no';
+        var storageSpaceString = this.props.storageSpace ? 'yes' : 'no'; 
 
         return (
             <View>
-                <View>
-                    <Text>Listed by: {this.props.firstName} {this.props.lastName}</Text>
-                    <Text>Contact number: {this.props.contactNum}</Text>
-                </View>
+                {this.userDetails}
                 <View>
                     <Text>Vehicle: {this.props.make} {this.props.model} ({this.props.year})</Text>
                 </View>
