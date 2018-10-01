@@ -5,7 +5,7 @@
 
 ## Current Progress
 
-0/17 pages done
+6/17 pages done
 
 ## Page List:
 
@@ -45,7 +45,6 @@ Chris:
 * 2: Find a ride listing page -  Thomas/Chris
 * 7: Post a ride page - Thomas
 * 9.2: View your ride listings (with rides existing) - Thomas
-* 10: Navigation bar - Thomas
 * 12: Add car to profile - Thomas
 
 #### Already done:
@@ -53,5 +52,6 @@ Chris:
 * 1: Home page - Thomas
 * 4: Login page - Chris/Thomas  
 * 5: Signup page - Chris/Thomas
+* 10: Navigation bar - Thomas
 * 13.1: Profile page - Thomas
 * 13.2: Edit profile page - Thomas
