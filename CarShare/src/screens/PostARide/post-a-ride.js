@@ -23,7 +23,8 @@ export default class PostARide extends Component {
       departureTime: '07:28',
       cars: [],
       selectedCarID: '',
-      postBtnPressed: false
+      postBtnPressed: false,
+      reqBeingSent: false
     }
   }
 
@@ -56,22 +57,27 @@ export default class PostARide extends Component {
     this.setState({ postBtnPressed: true });
 
     if (this.formValid()) {
+      this.setState({reqBeingSent: true});
+
       this.firestoreListings.add({
-          userDocumentID: firebase.auth().currentUser.uid,
-          carDocumentID: this.state.selectedCarID,
-          timeCreated: firebase.firestore.FieldValue.serverTimestamp(),
-          meetingPoint: this.state.meetingPoint,
-          destination: this.state.destination,
-          departureDate: this.state.departureDate,
-          departureTime: this.state.departureTime,
-          seatsAvailable: this.state.noSeats,
-          storageSpace: this.state.storageAvail,
-          whoWantsToCome: [],
-          whosComing: []
+        userDocumentID: firebase.auth().currentUser.uid,
+        carDocumentID: this.state.selectedCarID,
+        timeCreated: firebase.firestore.FieldValue.serverTimestamp(),
+        meetingPoint: this.state.meetingPoint,
+        destination: this.state.destination,
+        departureDate: this.state.departureDate,
+        departureTime: this.state.departureTime,
+        seatsAvailable: this.state.noSeats,
+        storageSpace: this.state.storageAvail,
+        whoWantsToCome: [],
+        whosComing: []
       })
         .then((response) => {
-          this.setState({ postBtnPressed: false });
           this.clearFields();
+        })
+        .catch((error) => {
+          this.setState({ signupBtnPressed: false })
+          this.setState({ reqBeingSent: false })
         })
     }
   }
@@ -84,9 +90,9 @@ export default class PostARide extends Component {
       destination: '',
       departureDate: '2018-10-05',
       departureTime: '07:28',
-      cars: [],
       selectedCarID: '',
-      postBtnPressed: false
+      postBtnPressed: false,
+      reqBeingSent: false
     })
   }
 
@@ -193,11 +199,18 @@ export default class PostARide extends Component {
               onDateChange={(time) => {this.setState({departureTime: time})}}
             />
 
-            <Button 
-              title='POST'
-              onPress={() => this.addListing()}
-              buttonStyle={styles.postBtn}
-            />
+            {this.state.reqBeingSent ?
+              <Button
+                loading
+                buttonStyle={styles.postBtn}
+              /> :
+              <Button 
+                title='POST'
+                onPress={() => this.addListing()}
+                buttonStyle={styles.postBtn}
+              />
+            }
+            
           </Card>
         </View>
       </ScrollView>
