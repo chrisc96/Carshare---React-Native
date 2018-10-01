@@ -7,14 +7,15 @@ import MyListings from '../../screens/MyListings/my-listings';
 import RidesImTaking from '../../screens/RidesImTaking/rides-im-taking';
 import PostARideStack from './post-a-ride-stack';
 import ProfileStack from './profile-stack';
+import { tabNavActive } from '../../config/commonStyles'
 
-export const LoggedInTabs = createBottomTabNavigator ({
-    FindARide: { 
+export const LoggedInTabs = createBottomTabNavigator({
+    FindARide: {
         screen: FindARide,
         navigationOptions: () => ({
             title: 'Find a ride',
-            tabBarIcon: ({focused, tintColour}) => (
-                <Icon name="search" color={focused ? 'limegreen' : tintColour} size={25} />
+            tabBarIcon: ({ focused, tintColour }) => (
+                <Icon name="search" color={focused ? tabNavActive : tintColour} size={25} />
             )
         })
     },
@@ -22,8 +23,8 @@ export const LoggedInTabs = createBottomTabNavigator ({
         screen: PostARideStack,
         navigationOptions: () => ({
             title: 'Post a ride',
-            tabBarIcon: ({focused, tintColour}) => (
-                <Icon name="add" color={focused ? 'limegreen' : tintColour} size={25} />
+            tabBarIcon: ({ focused, tintColour }) => (
+                <Icon name="add" color={focused ? tabNavActive : tintColour} size={25} />
             )
         })
     },
@@ -31,33 +32,33 @@ export const LoggedInTabs = createBottomTabNavigator ({
         screen: MyListings,
         navigationOptions: () => ({
             title: 'My listings',
-            tabBarIcon: ({focused, tintColour}) => (
-                <Icon name="folder" color={focused ? 'limegreen' : tintColour} size={25} />
+            tabBarIcon: ({ focused, tintColour }) => (
+                <Icon name="folder" color={focused ? tabNavActive : tintColour} size={25} />
             )
         })
     },
     RidesImTaking: {
         screen: RidesImTaking,
         navigationOptions: () => ({
-            title: 'Rides',
-            tabBarIcon: ({focused, tintColour}) => (
-                <Icon name="car" color={focused ? 'limegreen' : tintColour} size={25} />
+            title: 'My Rides',
+            tabBarIcon: ({ focused, tintColour }) => (
+                <Icon name="car" type='font-awesome' color={focused ? tabNavActive : tintColour} size={25} />
             )
         })
     },
     Profile: {
         screen: ProfileStack,
         navigationOptions: () => ({
-            tabBarIcon: ({focused, tintColour}) => (
-                <Icon name="people" color={focused ? 'limegreen' : tintColour} size={25} />
+            tabBarIcon: ({ focused, tintColour }) => (
+                <Icon name="people" color={focused ? tabNavActive : tintColour} size={25} />
             )
         })
     },
 },
-{
-    tabBarOptions: {
-        activeTintColor: 'limegreen'
-      }
-});
+    {
+        tabBarOptions: {
+            activeTintColor: tabNavActive
+        }
+    });
 
 export default LoggedInTabs

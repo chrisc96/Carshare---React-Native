@@ -5,7 +5,7 @@ import firebase from 'react-native-firebase';
 import styles from './sign-up-styles';
 import { SignupHeaderTitle } from './../../config/constants';
 import { headerTextColour, normalFontWeight } from '../../config/global-styles';
-import { errorTxtStyles } from '../../config/commonStyles';
+import { errorTxtStyles, lightGreenButton } from '../../config/commonStyles';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 export default class SignUp extends Component {
@@ -143,12 +143,12 @@ export default class SignUp extends Component {
                         {this.state.reqBeingSent ?
                             <Button
                                 loading
-                                buttonStyle={styles.signupBtn}
+                                buttonStyle={lightGreenButton}
                             /> :
                             <Button
                                 title="SIGN UP"
                                 onPress={() => this.signUp()}
-                                buttonStyle={styles.signupBtn}
+                                buttonStyle={lightGreenButton}
                             />
                         }
                     </Card>

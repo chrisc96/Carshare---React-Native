@@ -29,8 +29,4 @@ export default styles = StyleSheet.create({
   inputBox: {
     margin: 0
   },
-  signupBtn: {
-    backgroundColor: "#84d140",
-    height: 45,
-  }
 });

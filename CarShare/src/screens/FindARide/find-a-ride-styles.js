@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
   container: {
@@ -9,7 +9,16 @@ export default styles = StyleSheet.create({
   },
   noListingsTxt: {
     flex: 1,
-    flexDirection:'row',
-    alignItems:'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  searchBarContainer: {
+    backgroundColor: "#FFF",
+    borderBottomColor: 'transparent',
+    borderTopColor: 'transparent',
+    marginTop: 10,
+    marginLeft: -15,
+    marginRight: -15,
+    marginBottom: 10,
   }
 });

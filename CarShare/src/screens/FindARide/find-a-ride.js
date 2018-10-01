@@ -41,7 +41,7 @@ export default class FindARide extends Component {
     const listingsFromDB = [];
     snapshot.forEach((firestoreDocument) => {
       const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, carDocumentID, userDocumentID, whoWantsToCome, whosComing } = firestoreDocument.data();
-      
+
       firebase.firestore().doc('cars/' + carDocumentID).onSnapshot((carDocument) => {
         if (!carDocument.data()) return;
         const { make, model, year } = carDocument.data();
@@ -49,7 +49,7 @@ export default class FindARide extends Component {
         firebase.firestore().doc('users/' + userDocumentID).onSnapshot((userDocument) => {
           if (!userDocument.data()) return;
           const { firstName, lastName, contactNum } = userDocument.data();
-          
+
           listingsFromDB.push({
             key: firestoreDocument.id,
             firestoreDocument,
@@ -113,15 +113,7 @@ export default class FindARide extends Component {
         <SearchBar
           onChangeText={this.onChangeTextDelayed.bind(this)}
           placeholder='Search Listings'
-          containerStyle={{
-            backgroundColor: "#FFF",
-            borderBottomColor: 'transparent',
-            borderTopColor: 'transparent',
-            marginTop: 10,
-            marginLeft: -15,
-            marginRight: -15,
-            marginBottom: 10,
-          }}
+          containerStyle={styles.searchBarContainer}
           inputStyle={{
             backgroundColor: 'white',
           }}
@@ -129,10 +121,10 @@ export default class FindARide extends Component {
 
         <View>
           {this.state.searchBarEmpty ?
-            <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />}/> :
-            this.state.noData ? 
-              <Text style = "styles.noListingsTxt">No listings found by that search</Text> :
-              <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />}/>
+            <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
+            this.state.noData ?
+              <Text style="styles.noListingsTxt">No listings found by that search</Text> :
+              <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
           }
         </View>
       </View>

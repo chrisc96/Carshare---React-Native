@@ -1,22 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Card } from 'react-native-elements';
 
 import styles from './listing-styles';
+import { cardNoDivider, cardContainer } from '../../config/commonStyles';
 
 export default class Listing extends Component {
 
     constructor(props) {
         super();
         this.userDetails = null;
-        this.storageSpaceString = props.storageSpace ? 'yes' : 'no'; 
+        this.storageSpaceString = props.storageSpace ? 'yes' : 'no';
 
         if (props.firstName) {
-           this.userDetails = (
-            <View>
-                 <Text>Listed by: {props.firstName} {props.lastName}</Text>
-                 <Text>Contact number: {props.contactNum}</Text>
-             </View>
+            this.userDetails = (
+                <View>
+                    <Text>Listed by: {props.firstName} {props.lastName}</Text>
+                    <Text>Contact number: {props.contactNum}</Text>
+                </View>
             )
         }
 
@@ -25,8 +26,8 @@ export default class Listing extends Component {
     render() {
         return (
             <View>
-                <Card containerStyle={styles.listingCard}
-                    dividerStyle={styles.divider}
+                <Card containerStyle={cardContainer}
+                    dividerStyle={cardNoDivider}
                 >
                     {this.userDetails}
                     <View>

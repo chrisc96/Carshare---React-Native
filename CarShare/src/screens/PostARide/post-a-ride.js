@@ -5,7 +5,7 @@ import firebase from 'react-native-firebase';
 import DatePicker from 'react-native-datepicker';
 import { PostARideHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
-import { errorTxtStyles } from '../../config/commonStyles';
+import { errorTxtStyles, lightGreenButton } from '../../config/commonStyles';
 
 import styles from './post-a-ride-styles';
 
@@ -47,15 +47,15 @@ export default class PostARide extends Component {
     snapshot.forEach((firestoreDocument) => {
       const { make, model, rego, userID, year } = firestoreDocument.data();
 
-       carsFromDB.push({
-         key: firestoreDocument.id,
-         firestoreDocument,
-         make,
-         model,
-         rego,
-         userID,
-         year
-       });
+      carsFromDB.push({
+        key: firestoreDocument.id,
+        firestoreDocument,
+        make,
+        model,
+        rego,
+        userID,
+        year
+      });
     })
 
     this.setState({
@@ -67,7 +67,7 @@ export default class PostARide extends Component {
     this.setState({ postBtnPressed: true });
 
     if (this.formValid()) {
-      this.setState({reqBeingSent: true});
+      this.setState({ reqBeingSent: true });
 
       this.firestoreListings.add({
         userDocumentID: firebase.auth().currentUser.uid,
@@ -116,11 +116,11 @@ export default class PostARide extends Component {
     if (carID === 'Add new car') {
       this.goToAddACar();
     } else {
-      this.setState({selectedCarID: carID})
+      this.setState({ selectedCarID: carID })
     }
   }
 
-  goToAddACar= () => {
+  goToAddACar = () => {
     this.props.navigation.navigate('AddACar')
   }
 
@@ -132,7 +132,7 @@ export default class PostARide extends Component {
 
   render() {
     var carItems = this.state.cars.map((car, index) => {
-      return <Picker.Item key={index+1} value={car.key} label={car.make + ' ' + car.model} />
+      return <Picker.Item key={index + 1} value={car.key} label={car.make + ' ' + car.model} />
     });
 
     return (
@@ -160,17 +160,17 @@ export default class PostARide extends Component {
             <FormLabel>SPACE FOR BAGS?</FormLabel>
             <CheckBox
               checked={this.state.storageAvail}
-              onPress={() => this.setState({storageAvail: !this.state.storageAvail})}
+              onPress={() => this.setState({ storageAvail: !this.state.storageAvail })}
             />
 
             <FormLabel>No. SEATS AVAILABLE</FormLabel>
             <FormInput
               value={'' + this.state.noSeats}
-              onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'
+              onChangeText={text => this.convertToNum(text)} keyboardType='numeric'
             />
 
             <FormLabel>MEETING PLACE</FormLabel>
-            <FormInput 
+            <FormInput
               value={this.state.meetingPoint}
               placeholder='Please enter meeting point...'
               onChangeText={text => this.setState({ meetingPoint: text })}
@@ -180,7 +180,7 @@ export default class PostARide extends Component {
             </Text>
 
             <FormLabel>DESTINATION</FormLabel>
-            <FormInput 
+            <FormInput
               value={this.state.destination}
               placeholder='Please enter destination...'
               onChangeText={text => this.setState({ destination: text })}
@@ -190,13 +190,13 @@ export default class PostARide extends Component {
             </Text>
 
             <FormLabel>DEPARTURE DATE</FormLabel>
-            <DatePicker 
+            <DatePicker
               date={this.state.departureDate}
-              mode="date" 
+              mode="date"
               confirmBtnText="Done"
-              cancelBtnText="Cancel" 
+              cancelBtnText="Cancel"
               style={[styles.indented, styles.datePicker]}
-              onDateChange={(date) => {this.setState({departureDate: date})}}
+              onDateChange={(date) => { this.setState({ departureDate: date }) }}
             />
 
             <FormLabel>DEPARTURE TIME</FormLabel>
@@ -206,21 +206,21 @@ export default class PostARide extends Component {
               confirmBtnText="Done"
               cancelBtnText="Cancel"
               style={[styles.indented, styles.datePicker]}
-              onDateChange={(time) => {this.setState({departureTime: time})}}
+              onDateChange={(time) => { this.setState({ departureTime: time }) }}
             />
 
             {this.state.reqBeingSent ?
               <Button
                 loading
-                buttonStyle={styles.postBtn}
+                buttonStyle={lightGreenButton}
               /> :
-              <Button 
+              <Button
                 title='POST'
                 onPress={() => this.addListing()}
-                buttonStyle={styles.postBtn}
+                buttonStyle={lightGreenButton}
               />
             }
-            
+
           </Card>
         </View>
       </ScrollView>

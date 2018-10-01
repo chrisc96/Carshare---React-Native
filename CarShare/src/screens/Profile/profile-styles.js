@@ -30,8 +30,7 @@ export default styles = StyleSheet.create({
     top: 0,
     right: 0
   },
-  logoutBtn: {
-    backgroundColor: "#84d140",
-    height: 45,
+  lastItem: {
+    marginBottom: 10
   }
 });

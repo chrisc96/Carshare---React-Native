@@ -37,9 +37,5 @@ export default styles = StyleSheet.create({
   indented: {
     margin: 10,
     paddingLeft: '3%'
-  },
-  loginBtn: {
-    backgroundColor: "#03A9F4",
-    height: 45,
   }
 });

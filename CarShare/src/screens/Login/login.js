@@ -5,7 +5,7 @@ import firebase from 'react-native-firebase';
 import styles from './login-styles';
 import { LoginHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
-import { errorTxtStyles } from '../../config/commonStyles';
+import { errorTxtStyles, lightGreenButton, lightBlueButton } from '../../config/commonStyles';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 export default class Login extends Component {
@@ -105,13 +105,13 @@ export default class Login extends Component {
                     {this.state.loggedInPressed ?
                         <Button
                             loading
-                            buttonStyle={styles.loginBtn}
+                            buttonStyle={lightBlueButton}
                         />
                         :
                         <Button
                             title="LOGIN"
                             onPress={() => this.login()}
-                            buttonStyle={styles.loginBtn}
+                            buttonStyle={lightBlueButton}
                         />
                     }
 
@@ -122,7 +122,7 @@ export default class Login extends Component {
                     <Button
                         title="SIGN UP"
                         onPress={() => this.goToSignUp()}
-                        backgroundColor='#84d140'
+                        buttonStyle = {lightGreenButton}
                     />
                 </Card>
             </View>

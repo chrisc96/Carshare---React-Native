@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Button } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { Button } from 'react-native-elements'
 import styles from './home-styles';
+import { lightGreenButton, lightBlueButton } from '../../config/commonStyles'
 
 export default class Home extends Component {
     static navigationOptions = {
@@ -24,10 +26,18 @@ export default class Home extends Component {
                 <Text style={styles.subTitle}>one stop car pool shop</Text>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
-                        <Button title="Find a ride" color='limegreen' onPress={() => this.goToFindARide()} />
+                        <Button
+                            title="Find a ride"
+                            onPress={() => this.goToFindARide()}
+                            buttonStyle={lightBlueButton}
+                        />
                     </View>
                     <View style={styles.button}>
-                        <Button title="Log in" color='dodgerblue' onPress={() => this.goToLogin()} />
+                        <Button
+                            title="Log in"
+                            onPress={() => this.goToLogin()}
+                            buttonStyle={lightGreenButton}
+                        />
                     </View>
                 </View>
             </View>

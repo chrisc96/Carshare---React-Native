@@ -7,6 +7,7 @@ import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import firebase from 'react-native-firebase';
 
 import styles from './edit-profile-styles';
+import { lightGreenButton } from '../../config/commonStyles';
 
 export default class EditProfile extends Component {
 
@@ -14,9 +15,9 @@ export default class EditProfile extends Component {
         title: EditProfileHeaderTitle,
         headerTintColor: headerTextColour,
         headerTitleStyle: {
-          fontWeight: normalFontWeight,
+            fontWeight: normalFontWeight,
         }
-      }
+    }
 
     constructor() {
         super();
@@ -54,20 +55,20 @@ export default class EditProfile extends Component {
     }
 
     updateProfile() {
-        this.setState({reqBeingSent: true});
+        this.setState({ reqBeingSent: true });
 
         this.firestoreUser.update({
-          firstName: this.state.firstName ? this.state.firstName : this.state.originalFirstName,
-          lastName: this.state.lastName ? this.state.lastName : this.state.originalLastName,
-          contactNum: this.state.contactNum ? this.state.contactNum : this.state.originalContactNum
+            firstName: this.state.firstName ? this.state.firstName : this.state.originalFirstName,
+            lastName: this.state.lastName ? this.state.lastName : this.state.originalLastName,
+            contactNum: this.state.contactNum ? this.state.contactNum : this.state.originalContactNum
         })
-          .then((response) => {
-            this.setState({ reqBeingSent: false })
-            this.goToProfile();
-          })
-          .catch((error) => {
-            this.setState({ reqBeingSent: false })
-          })
+            .then((response) => {
+                this.setState({ reqBeingSent: false })
+                this.goToProfile();
+            })
+            .catch((error) => {
+                this.setState({ reqBeingSent: false })
+            })
     }
 
     render() {
@@ -80,33 +81,33 @@ export default class EditProfile extends Component {
                     title='Edit profile'
                 >
                     <FormLabel>FIRST NAME</FormLabel>
-                    <FormInput 
-                      value={this.state.firstName}
-                      onChangeText={text => this.setState({ firstName: text })}
+                    <FormInput
+                        value={this.state.firstName}
+                        onChangeText={text => this.setState({ firstName: text })}
                     />
 
                     <FormLabel>LAST NAME</FormLabel>
-                    <FormInput 
-                      value={this.state.lastName}
-                      onChangeText={text => this.setState({ lastName: text })}
+                    <FormInput
+                        value={this.state.lastName}
+                        onChangeText={text => this.setState({ lastName: text })}
                     />
 
                     <FormLabel>CONTACT NUMBER</FormLabel>
-                    <FormInput 
-                      value={this.state.contactNum}
-                      onChangeText={text => this.setState({ contactNum: text })}
+                    <FormInput
+                        value={this.state.contactNum}
+                        onChangeText={text => this.setState({ contactNum: text })}
                     />
-            
+
                     {this.state.reqBeingSent ?
-                      <Button
-                        loading
-                        buttonStyle={styles.updateBtn}
-                      /> :
-                      <Button 
-                        title='UPDATE'
-                        onPress={() => this.updateProfile()}
-                        buttonStyle={styles.updateBtn}
-                      />
+                        <Button
+                            loading
+                            buttonStyle={styles.updateBtn}
+                        /> :
+                        <Button
+                            title='UPDATE'
+                            onPress={() => this.updateProfile()}
+                            buttonStyle={lightGreenButton}
+                        />
                     }
                 </Card>
             </View>

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { View, Button, Text } from 'react-native';
-import { Card, Icon } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Card, Icon, Button } from 'react-native-elements';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { ProfileHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import firebase from 'react-native-firebase';
 
 import styles from './profile-styles';
+import { lightGreenButton } from '../../config/commonStyles';
 
 export default class Profile extends Component {
 
@@ -14,9 +15,9 @@ export default class Profile extends Component {
         title: ProfileHeaderTitle,
         headerTintColor: headerTextColour,
         headerTitleStyle: {
-          fontWeight: normalFontWeight,
+            fontWeight: normalFontWeight,
         }
-      }
+    }
 
     constructor() {
         super();
@@ -33,7 +34,7 @@ export default class Profile extends Component {
     componentDidMount() {
         this.firestoreUser.onSnapshot(this.onDocumentUpdate)
     }
-    
+
     onDocumentUpdate = (userDocument) => {
         const { firstName, lastName, contactNum } = userDocument.data();
 
@@ -51,7 +52,7 @@ export default class Profile extends Component {
             StackActions.reset({
                 index: 0,
                 key: null,
-                actions:[NavigationActions.navigate({routeName: 'LoggedOutStack'})]
+                actions: [NavigationActions.navigate({ routeName: 'LoggedOutStack' })]
             })
         )
     }
@@ -70,7 +71,7 @@ export default class Profile extends Component {
                     title='Profile'
                 >
                     <View style={styles.edit}>
-                        <Icon name="edit" onPress={() => this.goToEditProfile()}/>
+                        <Icon name="edit" onPress={() => this.goToEditProfile()} />
                     </View>
                     <View style={styles.detail}>
                         <Text>First Name: {this.state.firstName}</Text>
@@ -78,11 +79,15 @@ export default class Profile extends Component {
                     <View style={styles.detail}>
                         <Text>Last Name: {this.state.lastName}</Text>
                     </View>
-                    <View style={styles.detail}>
+                    <View style={[styles.detail, styles.lastItem]}>
                         <Text>Contact Number: {this.state.contactNum}</Text>
                     </View>
 
-                    <Button style={styles.logoutBtn} title="Logout" color='limegreen' onPress={() => this.logout()} />
+                    <Button
+                        buttonStyle={lightGreenButton}
+                        title="Logout"
+                        onPress={() => this.logout()}
+                    />
                 </Card>
             </View>
         );

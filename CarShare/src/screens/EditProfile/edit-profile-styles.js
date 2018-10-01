@@ -22,8 +22,4 @@ export default styles = StyleSheet.create({
     display: 'none',
     margin: 0
   },
-  updateBtn: {
-    backgroundColor: "#84d140",
-    height: 45,
-  }
 });
