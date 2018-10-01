@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Picker, ScrollView } from 'react-native';
+import { View, Picker, ScrollView, Text } from 'react-native';
 import { FormLabel, FormInput, CheckBox, Card, Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import DatePicker from 'react-native-datepicker';
+import { errorTxtStyles } from '../../config/commonStyles';
 
 import styles from './post-a-ride-styles';
 
@@ -14,7 +15,6 @@ export default class PostARide extends Component {
     this.firestoreCars = firebase.firestore().collection('cars').where('userID', '==', firebase.auth().currentUser.uid)
 
     this.state = {
-      listings: [],
       storageAvail: false,
       noSeats: 0,
       meetingPoint: '',
@@ -22,7 +22,8 @@ export default class PostARide extends Component {
       departureDate: '2018-10-05',
       departureTime: '07:28',
       cars: [],
-      selectedCarID: ''
+      selectedCarID: '',
+      postBtnPressed: false
     }
   }
 
@@ -52,19 +53,41 @@ export default class PostARide extends Component {
   }
 
   addListing() {
-    this.firestoreListings.add({
-        userDocumentID: firebase.auth().currentUser.uid,
-        carDocumentID: this.state.selectedCarID,
-        timeCreated: firebase.firestore.FieldValue.serverTimestamp(),
-        meetingPoint: this.state.meetingPoint,
-        destination: this.state.destination,
-        departureDate: this.state.departureDate,
-        departureTime: this.state.departureTime,
-        seatsAvailable: this.state.noSeats,
-        storageSpace: this.state.storageAvail,
-        whoWantsToCome: [],
-        whosComing: []
-    });
+    this.setState({ postBtnPressed: true });
+
+    if (this.formValid()) {
+      this.firestoreListings.add({
+          userDocumentID: firebase.auth().currentUser.uid,
+          carDocumentID: this.state.selectedCarID,
+          timeCreated: firebase.firestore.FieldValue.serverTimestamp(),
+          meetingPoint: this.state.meetingPoint,
+          destination: this.state.destination,
+          departureDate: this.state.departureDate,
+          departureTime: this.state.departureTime,
+          seatsAvailable: this.state.noSeats,
+          storageSpace: this.state.storageAvail,
+          whoWantsToCome: [],
+          whosComing: []
+      })
+        .then((response) => {
+          this.setState({ postBtnPressed: false });
+          this.clearFields();
+        })
+    }
+  }
+
+  clearFields() {
+    this.setState({
+      storageAvail: false,
+      noSeats: 0,
+      meetingPoint: '',
+      destination: '',
+      departureDate: '2018-10-05',
+      departureTime: '07:28',
+      cars: [],
+      selectedCarID: '',
+      postBtnPressed: false
+    })
   }
 
   convertToNum(text) {
@@ -85,9 +108,15 @@ export default class PostARide extends Component {
     this.props.navigation.navigate('AddACar', { toPage: 'PostARide'})
   }
 
+  formValid() {
+    return this.state.selectedCarID &&
+      this.state.meetingPoint.length > 0 &&
+      this.state.destination.length > 0
+  }
+
   render() {
     var carItems = this.state.cars.map((car, index) => {
-      return <Picker.Item key={index} value={car.key} label={car.make + ' ' + car.model} />
+      return <Picker.Item key={index+1} value={car.key} label={car.make + ' ' + car.model} />
     });
 
     return (
@@ -104,9 +133,13 @@ export default class PostARide extends Component {
               selectedValue={this.state.selectedCarID}
               style={styles.indented}
               onValueChange={(carID) => this.onChange(carID)}>
+              <Picker.Item key={0} value='' label='Please select car...' />
               {carItems}
-              <Picker.Item key={carItems.length} value='Add new car' label='Add new car' />
+              <Picker.Item key={carItems.length + 1} value='Add new car' label='Add new car' />
             </Picker>
+            <Text style={[styles.indented, errorTxtStyles]}>
+              {!this.state.selectedCarID && this.state.postBtnPressed ? "Please select a car" : ""}
+            </Text>
 
             <FormLabel>SPACE FOR BAGS?</FormLabel>
             <CheckBox
@@ -123,9 +156,22 @@ export default class PostARide extends Component {
             <FormLabel>MEETING PLACE</FormLabel>
             <FormInput 
               value={this.state.meetingPoint}
-              placeholder='Please enter meeting place...'
+              placeholder='Please enter meeting point...'
               onChangeText={text => this.setState({ meetingPoint: text })}
             />
+            <Text style={[styles.indented, errorTxtStyles]}>
+              {this.state.meetingPoint.length === 0 && this.state.postBtnPressed ? "Please enter a meeting point" : ""}
+            </Text>
+
+            <FormLabel>DESTINATION</FormLabel>
+            <FormInput 
+              value={this.state.destination}
+              placeholder='Please enter destination...'
+              onChangeText={text => this.setState({ destination: text })}
+            />
+            <Text style={[styles.indented, errorTxtStyles]}>
+              {this.state.destination.length === 0 && this.state.postBtnPressed ? "Please enter a destination" : ""}
+            </Text>
 
             <FormLabel>DEPARTURE DATE</FormLabel>
             <DatePicker 
