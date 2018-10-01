@@ -33,6 +33,7 @@
 ## Current status
 
 To Do:
+* 3, 6, 8, 9.1, 11, 13.2, 14.1, 14.2, 15, 16, 17
 
 #### What each person has left to do:
 
@@ -41,4 +42,15 @@ Chris:
 
 #### In Progress:
 
+* 2: Find a ride listing page -  Thomas/Chris
+* 7: Post a ride page - Thomas
+* 9.2: View your ride listings (with rides existing) - Thomas
+* 10: Navigation bar - Thomas
+* 12: Add car to profile - Thomas
+* 13.1: Profile page - Thomas
+
 #### Already done:
+
+* 1: Home page - Thomas
+* 4: Login page - Chris/Thomas  
+* 5: Signup page - Chris/Thomas
