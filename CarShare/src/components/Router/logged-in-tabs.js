@@ -1,9 +1,10 @@
 import React from 'react';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from 'react-navigation';
 
 import FindARide from '../../screens/FindARide/find-a-ride';
 import MyListings from '../../screens/MyListings/my-listings';
+import RidesImTaking from '../../screens/RidesImTaking/rides-im-taking';
 import PostARideStack from './post-a-ride-stack';
 import ProfileStack from './profile-stack';
 
@@ -32,6 +33,15 @@ export const LoggedInTabs = createBottomTabNavigator ({
             title: 'My listings',
             tabBarIcon: ({focused, tintColour}) => (
                 <Icon name="folder" color={focused ? 'limegreen' : tintColour} size={25} />
+            )
+        })
+    },
+    RidesImTaking: {
+        screen: RidesImTaking,
+        navigationOptions: () => ({
+            title: 'Rides',
+            tabBarIcon: ({focused, tintColour}) => (
+                <Icon name="car" color={focused ? 'limegreen' : tintColour} size={25} />
             )
         })
     },
