@@ -3,11 +3,21 @@ import { View, Picker, ScrollView, Text } from 'react-native';
 import { FormLabel, FormInput, CheckBox, Card, Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import DatePicker from 'react-native-datepicker';
+import { PostARideHeaderTitle } from './../../config/constants'
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import { errorTxtStyles } from '../../config/commonStyles';
 
 import styles from './post-a-ride-styles';
 
 export default class PostARide extends Component {
+
+  static navigationOptions = {
+    title: PostARideHeaderTitle,
+    headerTintColor: headerTextColour,
+    headerTitleStyle: {
+      fontWeight: normalFontWeight,
+    }
+  }
 
   constructor() {
     super();
@@ -111,7 +121,7 @@ export default class PostARide extends Component {
   }
 
   goToAddACar= () => {
-    this.props.navigation.navigate('AddACar', { toPage: 'PostARide'})
+    this.props.navigation.navigate('AddACar')
   }
 
   formValid() {

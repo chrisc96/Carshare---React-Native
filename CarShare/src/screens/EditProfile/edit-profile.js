@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { FormLabel, FormInput, Card, Button } from 'react-native-elements';
 import { NavigationActions, StackActions } from 'react-navigation';
+import { EditProfileHeaderTitle } from './../../config/constants'
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import firebase from 'react-native-firebase';
 
 import styles from './edit-profile-styles';
 
 export default class EditProfile extends Component {
+
+    static navigationOptions = {
+        title: EditProfileHeaderTitle,
+        headerTintColor: headerTextColour,
+        headerTitleStyle: {
+          fontWeight: normalFontWeight,
+        }
+      }
+
     constructor() {
         super();
         this.userID = firebase.auth().currentUser.uid;

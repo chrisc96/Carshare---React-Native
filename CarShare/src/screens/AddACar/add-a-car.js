@@ -19,7 +19,6 @@ export default class AddACar extends Component {
   constructor(props) {
     super();
     this.firestoreCars = firebase.firestore().collection('cars');
-    this.pageToGoTo = props.navigation.state.params.toPage;
 
     this.state = {
       make: '',
@@ -38,7 +37,7 @@ export default class AddACar extends Component {
         year: this.state.year
     })
     .then(response => {
-        this.props.navigation.navigate(this.pageToGoTo);
+        this.props.navigation.navigate('PostARide');
     })
     .catch(error => {
         

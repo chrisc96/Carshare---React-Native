@@ -30,7 +30,7 @@ export default styles = StyleSheet.create({
     top: 0,
     right: 0
   },
-  btn: {
+  logoutBtn: {
     backgroundColor: "#84d140",
     height: 45,
   }

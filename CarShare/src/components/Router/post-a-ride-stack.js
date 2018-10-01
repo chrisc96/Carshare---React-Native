@@ -9,7 +9,7 @@ const PostARideStack = createStackNavigator ({
 },
 {
     navigationOptions: {
-        header: null
+        headerStyle: { backgroundColor: '#75AF74', opacity: 1}
     },
     cardStyle: {
         shadowColor: 'transparent',

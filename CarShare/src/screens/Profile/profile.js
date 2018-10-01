@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import { View, Button, Text } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { NavigationActions, StackActions } from 'react-navigation';
+import { ProfileHeaderTitle } from './../../config/constants'
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import firebase from 'react-native-firebase';
 
 import styles from './profile-styles';
 
 export default class Profile extends Component {
+
+    static navigationOptions = {
+        title: ProfileHeaderTitle,
+        headerTintColor: headerTextColour,
+        headerTitleStyle: {
+          fontWeight: normalFontWeight,
+        }
+      }
+
     constructor() {
         super();
         this.userID = firebase.auth().currentUser.uid;
@@ -71,7 +82,7 @@ export default class Profile extends Component {
                         <Text>Contact Number: {this.state.contactNum}</Text>
                     </View>
 
-                    <Button style={styles.btn} title="Logout" color='limegreen' onPress={() => this.logout()} />
+                    <Button style={styles.logoutBtn} title="Logout" color='limegreen' onPress={() => this.logout()} />
                 </Card>
             </View>
         );
