@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import firebase from 'react-native-firebase';
 import { View, Text, FlatList } from 'react-native';
-import styles from './my-listings-styles'
-import { MyListingsHeaderTitle } from './../../config/constants'
-import { headerTextColour, normalFontWeight } from '../../config/global-styles'
+
+import styles from './my-listings-styles';
 import Listing from '../../components/Listing/listing';
 
 export default class MyListings extends Component {
-
-  static navigationOptions = {
-    headerTitle: MyListingsHeaderTitle,
-    headerTintColor: headerTextColour,
-    headerTitleStyle: {
-      fontWeight: normalFontWeight,
-    }
-  }
 
   constructor() {
     super();

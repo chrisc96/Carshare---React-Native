@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
-import {View, Button, Picker} from 'react-native';
-import {FormLabel, FormInput, CheckBox} from 'react-native-elements';
+import { View, Picker, ScrollView } from 'react-native';
+import { FormLabel, FormInput, CheckBox, Card, Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
-import { PostARideHeaderTitle } from './../../config/constants'
-import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import DatePicker from 'react-native-datepicker';
+
 import styles from './post-a-ride-styles';
 
 export default class PostARide extends Component {
-
-  static navigationOptions = {
-    title: PostARideHeaderTitle,
-    headerTintColor: headerTextColour,
-    headerTitleStyle: {
-      fontWeight: normalFontWeight,
-    }
-  }
 
   constructor() {
     super();
@@ -100,35 +91,70 @@ export default class PostARide extends Component {
     });
 
     return (
-      <View style = {styles.form}>
-        <FormLabel>Car to use:</FormLabel>
-        <Picker
-          selectedValue={this.state.selectedCarID}
-          onValueChange={(carID) => this.onChange(carID)}>
-          {carItems}
-          <Picker.Item key={carItems.length} value='Add new car' label='Add new car' />
-        </Picker>
+      <ScrollView>
+        <View style={styles.form}>
+          <Card
+            containerStyle={styles.postARideCard}
+            titleStyle={styles.postARideCardTitle}
+            dividerStyle={styles.divider}
+            title='Post a ride'
+          >
+            <FormLabel>CAR TO USE</FormLabel>
+            <Picker
+              selectedValue={this.state.selectedCarID}
+              style={styles.indented}
+              onValueChange={(carID) => this.onChange(carID)}>
+              {carItems}
+              <Picker.Item key={carItems.length} value='Add new car' label='Add new car' />
+            </Picker>
 
-        <FormLabel>Space for bags?</FormLabel>
-        <CheckBox checked={this.state.storageAvail} onPress={() => this.setState({storageAvail: !this.state.storageAvail})}/>
-        
-        <FormLabel>No. Seats Available:</FormLabel>
-        <FormInput value={'' + this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'/>
+            <FormLabel>SPACE FOR BAGS?</FormLabel>
+            <CheckBox
+              checked={this.state.storageAvail}
+              onPress={() => this.setState({storageAvail: !this.state.storageAvail})}
+            />
 
-        <FormLabel>No. Seats Available:</FormLabel>
-        <FormInput value={'' + this.state.noSeats} onChangeText={text => this.convertToNum(text)} keyboardType='numeric' />
+            <FormLabel>No. SEATS AVAILABLE</FormLabel>
+            <FormInput
+              value={'' + this.state.noSeats}
+              onChangeText={text => this.convertToNum(text)} keyboardType = 'numeric'
+            />
 
-        <FormLabel>Meeting Place:</FormLabel>
-        <FormInput value={this.state.meetingPoint} onChangeText={text => this.setState({ meetingPoint: text })} />
+            <FormLabel>MEETING PLACE</FormLabel>
+            <FormInput 
+              value={this.state.meetingPoint}
+              placeholder='Please enter meeting place...'
+              onChangeText={text => this.setState({ meetingPoint: text })}
+            />
 
-        <FormLabel>Departure Date:</FormLabel>
-        <DatePicker date={this.state.departureDate} mode="date" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(date) => {this.setState({departureDate: date})}}/>
+            <FormLabel>DEPARTURE DATE</FormLabel>
+            <DatePicker 
+              date={this.state.departureDate}
+              mode="date" 
+              confirmBtnText="Done"
+              cancelBtnText="Cancel" 
+              style={[styles.indented, styles.datePicker]}
+              onDateChange={(date) => {this.setState({departureDate: date})}}
+            />
 
-        <FormLabel>Departure Time:</FormLabel>
-        <DatePicker date={this.state.departureTime} mode="time" confirmBtnText="Done" cancelBtnText="Cancel" onDateChange={(time) => {this.setState({departureTime: time})}} />
+            <FormLabel>DEPARTURE TIME</FormLabel>
+            <DatePicker
+              date={this.state.departureTime}
+              mode="time"
+              confirmBtnText="Done"
+              cancelBtnText="Cancel"
+              style={[styles.indented, styles.datePicker]}
+              onDateChange={(time) => {this.setState({departureTime: time})}}
+            />
 
-        <Button title={'Submit'} onPress={() => this.addListing()} />
-      </View>
+            <Button 
+              title='POST'
+              onPress={() => this.addListing()}
+              buttonStyle={styles.postBtn}
+            />
+          </Card>
+        </View>
+      </ScrollView>
     );
   }
 }

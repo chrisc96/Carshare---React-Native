@@ -10,6 +10,10 @@ const PostARideStack = createStackNavigator ({
 {
     navigationOptions: {
         header: null
+    },
+    cardStyle: {
+        shadowColor: 'transparent',
+        backgroundColor: 'transparent'
     }
 });
 
