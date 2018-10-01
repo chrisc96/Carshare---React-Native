@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import FindARide from '../../screens/FindARide/find-a-ride';
 import MyListings from '../../screens/MyListings/my-listings';
 import PostARideStack from './post-a-ride-stack';
-import Profile from '../../screens/Profile/profile';
+import ProfileStack from './profile-stack';
 
 export const LoggedInTabs = createBottomTabNavigator ({
     FindARide: { 
@@ -36,7 +36,7 @@ export const LoggedInTabs = createBottomTabNavigator ({
         })
     },
     Profile: {
-        screen: Profile,
+        screen: ProfileStack,
         navigationOptions: () => ({
             tabBarIcon: ({focused, tintColour}) => (
                 <Icon name="people" color={focused ? 'limegreen' : tintColour} size={25} />

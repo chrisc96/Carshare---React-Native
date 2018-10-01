@@ -61,7 +61,7 @@ export default class AddACar extends Component {
           <FormLabel>Year:</FormLabel>
           <FormInput value={this.state.year} onChangeText={text => this.setState({year: text})}/>
 
-          <Button title={'Submit'} onPress={() => this.addCar()}/>
+          <Button title='Submit' onPress={() => this.addCar()}/>
         </View>
       );
   }

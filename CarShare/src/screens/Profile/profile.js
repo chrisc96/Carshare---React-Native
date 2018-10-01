@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { View, Button, Text } from 'react-native';
+import { Card, Icon } from 'react-native-elements';
 import { NavigationActions, StackActions } from 'react-navigation';
 import firebase from 'react-native-firebase';
 
-export default class Home extends Component {
+import styles from './profile-styles';
+
+export default class Profile extends Component {
     constructor() {
         super();
         this.userID = firebase.auth().currentUser.uid;
@@ -42,19 +45,34 @@ export default class Home extends Component {
         )
     }
 
+    goToEditProfile() {
+        this.props.navigation.navigate('EditProfile');
+    }
+
     render() {
         return (
-            <View>
-                <View>
-                    <Text>First Name: {this.state.firstName}</Text>
-                </View>
-                <View>
-                    <Text>Last Name: {this.state.lastName}</Text>
-                </View>
-                <View>
-                    <Text>Contact Number: {this.state.contactNum}</Text>
-                </View>
-                <Button title="Logout" color='limegreen' onPress={() => this.logout()} />
+            <View style={styles.details}>
+                <Card
+                    containerStyle={styles.profileCard}
+                    titleStyle={styles.profileTitle}
+                    dividerStyle={styles.divider}
+                    title='Profile'
+                >
+                    <View style={styles.edit}>
+                        <Icon name="edit" onPress={() => this.goToEditProfile()}/>
+                    </View>
+                    <View style={styles.detail}>
+                        <Text>First Name: {this.state.firstName}</Text>
+                    </View>
+                    <View style={styles.detail}>
+                        <Text>Last Name: {this.state.lastName}</Text>
+                    </View>
+                    <View style={styles.detail}>
+                        <Text>Contact Number: {this.state.contactNum}</Text>
+                    </View>
+
+                    <Button style={styles.btn} title="Logout" color='limegreen' onPress={() => this.logout()} />
+                </Card>
             </View>
         );
     }
