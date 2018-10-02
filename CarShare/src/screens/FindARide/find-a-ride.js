@@ -53,9 +53,6 @@ export default class FindARide extends Component {
     this.firestoreListings.onSnapshot(this.onCollectionUpdate)
   }
 
-  componentWillUnmount() {
-    this.firestoreListings.unsubscribe()
-  }
 
   onCollectionUpdate = (snapshot) => {
     const listingsFromDB = [];
