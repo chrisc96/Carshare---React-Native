@@ -3,6 +3,9 @@ import { StyleSheet, PixelRatio } from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: '50%',
+    borderWidth: 1,
+    borderColor: 'red',
     paddingLeft: 15,
     paddingRight: 15,
   },
@@ -15,12 +18,12 @@ export default styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
-    marginLeft: -15,
-    marginRight: -15,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   listingContainer: {
-    borderColor: 'red',
-    borderWidth: 1,
-    paddingBottom: '19%',
-  }
+    // borderColor: 'red',
+    height: '80%',
+    // borderWidth: 1,
+  },
 });

@@ -22,6 +22,7 @@ export default class FindARide extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props)
 
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
@@ -111,32 +112,32 @@ export default class FindARide extends Component {
   render() {
     return (
       <View>
+        {console.log('auth', firebase.auth().currentUser)}
         {firebase.auth().currentUser === null ? null :
           <Header
             headerTitle={FindARideHeaderTitle}>
           </Header>
         }
 
-        <View style={styles.container}>
-          <SearchBar
-            onChangeText={this.onChangeTextDelayed.bind(this)}
-            placeholder='Search Listings'
-            containerStyle={styles.searchBarContainer}
-            inputStyle={{
-              backgroundColor: 'white',
-            }}
-          />
+        <SearchBar
+          onChangeText={this.onChangeTextDelayed.bind(this)}
+          placeholder='Search Listings'
+          containerStyle={styles.searchBarContainer}
+          inputStyle={{
+            backgroundColor: 'white',
+          }}
+        />
 
-          <View style={styles.listingContainer}>
-            {this.state.searchBarEmpty ?
-              <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
-              this.state.noData ?
-                <Text style="styles.noListingsTxt">No listings found by that search</Text> :
-                <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
-            }
-          </View>
+
+        <View style={styles.listingContainer}>
+          {this.state.searchBarEmpty ?
+            <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
+            this.state.noData ?
+              <Text style="styles.noListingsTxt">No listings found by that search</Text> :
+              <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
+          }
         </View>
       </View>
     );
   }
-} -0 - 1
+}
