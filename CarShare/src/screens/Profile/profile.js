@@ -46,15 +46,17 @@ export default class Profile extends Component {
     }
 
     logout() {
-        firebase.auth().signOut();
-        // prevent back button from appearing
-        this.props.navigation.dispatch(
-            StackActions.reset({
-                index: 0,
-                key: null,
-                actions: [NavigationActions.navigate({ routeName: 'LoggedOutStack' })]
-            })
-        )
+        firebase.auth().signOut().then(res => {
+            // prevent back button from appearing
+            this.props.navigation.dispatch(
+                StackActions.reset({
+                    index: 0,
+                    key: null,
+                    actions: [NavigationActions.navigate({ routeName: 'LoggedOutStack' })]
+                })
+            )
+            firebase.auth.currentUser = null
+        });
     }
 
     goToEditProfile() {

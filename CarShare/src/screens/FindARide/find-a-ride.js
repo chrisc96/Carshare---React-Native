@@ -4,11 +4,12 @@ import firebase from 'react-native-firebase';
 import styles from './find-a-ride-styles'
 import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
-import { listingContains } from '../../config/utils'
-import Listing from '../../components/Listing/listing';
-import { FindARideHeaderTitle } from './../../config/constants'
-import { headerTextColour, normalFontWeight } from '../../config/global-styles'
+
+import { listingContains } from '../../config/utils';
+import { FindARideHeaderTitle } from './../../config/constants';
+import { headerTextColour, normalFontWeight } from '../../config/global-styles';
 import Header from '../../components/Header/header';
+import Listing from '../../components/Listing/listing';
 
 export default class FindARide extends Component {
 
@@ -16,7 +17,7 @@ export default class FindARide extends Component {
     headerTitle: FindARideHeaderTitle,
     headerTintColor: headerTextColour,
     headerTitleStyle: {
-        fontWeight: normalFontWeight,
+      fontWeight: normalFontWeight,
     }
   }
 
@@ -36,7 +37,6 @@ export default class FindARide extends Component {
         }
       }
     }
-
     
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
@@ -125,29 +125,26 @@ export default class FindARide extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         {this.header}
 
-        <View style={styles.container}>
-          <SearchBar
-            onChangeText={this.onChangeTextDelayed.bind(this)}
-            placeholder='Search Listings'
-            containerStyle={styles.searchBarContainer}
-            inputStyle={{
-              backgroundColor: 'white',
-            }}
-          />
-
-          <View>
-            {this.state.searchBarEmpty ?
-              <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
-              this.state.noData ?
-                <Text style="styles.noListingsTxt">No listings found by that search</Text> :
-                <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
-            }
-          </View>
+        <SearchBar
+          onChangeText={this.onChangeTextDelayed.bind(this)}
+          placeholder='Search Listings'
+          containerStyle={styles.searchBarContainer}
+          inputStyle={{
+            backgroundColor: 'white',
+          }}
+        />
+        <View style={styles.listingContainer}>
+          {this.state.searchBarEmpty ?
+            <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
+            this.state.noData ?
+              <Text style="styles.noListingsTxt">No listings found by that search</Text> :
+              <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
+          }
         </View>
       </View>
-    );
+    )
   }
-} -0 - 1
+}
