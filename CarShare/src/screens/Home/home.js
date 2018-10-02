@@ -34,7 +34,7 @@ export default class Home extends Component {
                     </View>
                     <View style={styles.button}>
                         <Button
-                            title="Log in"
+                            title="Login"
                             onPress={() => this.goToLogin()}
                             buttonStyle={lightGreenButton}
                         />
