@@ -10,7 +10,7 @@ export default class Home extends Component {
     }
 
     goToFindARide() {
-        this.props.navigation.navigate('FindARide');
+        this.props.navigation.navigate('FindARide', {loggedOut: true});
     }
 
     goToLogin() {

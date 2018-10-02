@@ -42,7 +42,7 @@ export const LoggedInTabs = createBottomTabNavigator({
         navigationOptions: () => ({
             title: 'My Rides',
             tabBarIcon: ({ focused, tintColour }) => (
-                <Icon name="car" type='font-awesome' color={focused ? tabNavActive : tintColour} size={25} />
+                <Icon name="people" color={focused ? tabNavActive : tintColour} size={25} />
             )
         })
     },
@@ -50,7 +50,7 @@ export const LoggedInTabs = createBottomTabNavigator({
         screen: ProfileStack,
         navigationOptions: () => ({
             tabBarIcon: ({ focused, tintColour }) => (
-                <Icon name="people" color={focused ? tabNavActive : tintColour} size={25} />
+                <Icon name="person" color={focused ? tabNavActive : tintColour} size={25} />
             )
         })
     },

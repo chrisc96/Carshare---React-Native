@@ -7,13 +7,37 @@ import _ from 'lodash'
 import { listingContains } from '../../config/utils'
 import Listing from '../../components/Listing/listing';
 import { FindARideHeaderTitle } from './../../config/constants'
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import Header from '../../components/Header/header';
 
 export default class FindARide extends Component {
 
+  static navigationOptions = {
+    headerTitle: FindARideHeaderTitle,
+    headerTintColor: headerTextColour,
+    headerTitleStyle: {
+        fontWeight: normalFontWeight,
+    }
+  }
+
   constructor(props) {
     super(props);
 
+    this.header = (
+      <Header
+        headerTitle={FindARideHeaderTitle}>
+      </Header>
+    );
+
+    if (this.props.navigation.state) {
+      if (this.props.navigation.state.params) {
+        if (this.props.navigation.state.params.loggedOut) {
+          this.header = null;
+        }
+      }
+    }
+
+    
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
 
@@ -102,9 +126,7 @@ export default class FindARide extends Component {
   render() {
     return (
       <View>
-        <Header
-          headerTitle={FindARideHeaderTitle}>
-        </Header>
+        {this.header}
 
         <View style={styles.container}>
           <SearchBar
