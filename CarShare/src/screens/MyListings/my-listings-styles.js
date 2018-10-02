@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-    container: {
+    listingsContainer: {
         width: '100%',
-        height: '100%',
-        paddingLeft: 15,
+        height: '90%',
         paddingRight: 15
+    },
+    container: {
+        flex: 1
     }
 });

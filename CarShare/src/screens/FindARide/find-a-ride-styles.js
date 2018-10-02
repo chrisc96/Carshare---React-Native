@@ -14,10 +14,13 @@ export default styles = StyleSheet.create({
   },
   listingContainer: {
     width: '100%',
-    // borderColor: 'red',
     height: '80%',
-    // borderWidth: 1,
-    paddingRight: 12
+    paddingRight: 15
+  },
+  loggedOutListingContainer: {
+    width: '100%',
+    height: '90%',
+    paddingRight: 15
   },
   container: {
     flex: 1

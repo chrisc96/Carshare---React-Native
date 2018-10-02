@@ -54,12 +54,12 @@ export default class MyListings extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Header
           headerTitle={MyListingsHeaderTitle}>
         </Header>
 
-        <View style={styles.container}>
+        <View style={styles.listingsContainer}>
           <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} />
         </View>
 

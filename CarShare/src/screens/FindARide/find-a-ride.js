@@ -114,6 +114,8 @@ export default class FindARide extends Component {
   }
 
   render() {
+    var listingContainer = firebase.auth().currentUser ? styles.listingContainer : styles.loggedOutListingContainer
+
     return (
       <View style={styles.container}>
         {!firebase.auth().currentUser ? null :
@@ -131,7 +133,7 @@ export default class FindARide extends Component {
           }}
         />
 
-        <View style={styles.listingContainer}>
+        <View style={listingContainer}>
           {this.state.searchBarEmpty ?
             <FlatList data={this.state.listings} onPress={() => goToHome()} renderItem={({ item }) =>  {
                 return (
