@@ -8,8 +8,17 @@ import { listingContains } from '../../config/utils'
 import Listing from '../../components/Listing/listing';
 import { FindARideHeaderTitle } from './../../config/constants'
 import Header from '../../components/Header/header';
+import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 
 export default class FindARide extends Component {
+
+  static navigationOptions = {
+    headerTitle: FindARideHeaderTitle,
+    headerTintColor: headerTextColour,
+    headerTitleStyle: {
+      fontWeight: normalFontWeight,
+    }
+  }
 
   constructor(props) {
     super(props);
@@ -102,9 +111,11 @@ export default class FindARide extends Component {
   render() {
     return (
       <View>
-        <Header
-          headerTitle={FindARideHeaderTitle}>
-        </Header>
+        {firebase.auth().currentUser === null ? null :
+          <Header
+            headerTitle={FindARideHeaderTitle}>
+          </Header>
+        }
 
         <View style={styles.container}>
           <SearchBar
@@ -116,7 +127,7 @@ export default class FindARide extends Component {
             }}
           />
 
-          <View>
+          <View style={styles.listingContainer}>
             {this.state.searchBarEmpty ?
               <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
               this.state.noData ?

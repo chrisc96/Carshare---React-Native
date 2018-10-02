@@ -11,9 +11,9 @@ export default class Header extends Component {
 
     render() {
         return (
-            <View style={{ paddingTop: 15, paddingBottom: 15, backgroundColor: '#75AF74', elevation: 5 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ flex: 1, color: 'white', paddingLeft: 16, fontSize: 20 }}>{this.props.headerTitle}</Text>
+            <View style={styles.headerContainer}>
+                <View style={styles.headerRow}>
+                    <Text style={styles.headerTitleTxt}>{this.props.headerTitle}</Text>
                 </View>
             </View>
         )
