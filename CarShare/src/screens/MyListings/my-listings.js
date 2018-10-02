@@ -4,17 +4,9 @@ import { View, Text, FlatList } from 'react-native';
 import styles from './my-listings-styles';
 import Listing from '../../components/Listing/listing';
 import { MyListingsHeaderTitle } from '../../config/constants';
-import { headerTextColour, normalFontWeight } from '../../config/global-styles';
+import Header from '../../components/Header/header';
 
 export default class MyListings extends Component {
-
-  static navigationOptions = {
-    title: MyListingsHeaderTitle,
-    headerTintColor: headerTextColour,
-    headerTitleStyle: {
-      fontWeight: normalFontWeight,
-    }
-  }
 
   constructor() {
     super();
@@ -62,8 +54,15 @@ export default class MyListings extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} />
+      <View>
+        <Header
+          headerTitle={MyListingsHeaderTitle}>
+        </Header>
+
+        <View style={styles.container}>
+          <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} />
+        </View>
+
       </View>
     );
   }

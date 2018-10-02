@@ -7,17 +7,9 @@ import _ from 'lodash'
 import { listingContains } from '../../config/utils'
 import Listing from '../../components/Listing/listing';
 import { FindARideHeaderTitle } from './../../config/constants'
-import { headerTextColour, normalFontWeight } from '../../config/global-styles'
+import Header from '../../components/Header/header';
 
 export default class FindARide extends Component {
-
-  static navigationOptions = {
-    headerTitle: FindARideHeaderTitle,
-    headerTintColor: headerTextColour,
-    headerTitleStyle: {
-      fontWeight: normalFontWeight,
-    }
-  }
 
   constructor(props) {
     super(props);
@@ -109,25 +101,31 @@ export default class FindARide extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <SearchBar
-          onChangeText={this.onChangeTextDelayed.bind(this)}
-          placeholder='Search Listings'
-          containerStyle={styles.searchBarContainer}
-          inputStyle={{
-            backgroundColor: 'white',
-          }}
-        />
+      <View>
+        <Header
+          headerTitle={FindARideHeaderTitle}>
+        </Header>
 
-        <View>
-          {this.state.searchBarEmpty ?
-            <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
-            this.state.noData ?
-              <Text style="styles.noListingsTxt">No listings found by that search</Text> :
-              <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
-          }
+        <View style={styles.container}>
+          <SearchBar
+            onChangeText={this.onChangeTextDelayed.bind(this)}
+            placeholder='Search Listings'
+            containerStyle={styles.searchBarContainer}
+            inputStyle={{
+              backgroundColor: 'white',
+            }}
+          />
+
+          <View>
+            {this.state.searchBarEmpty ?
+              <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
+              this.state.noData ?
+                <Text style="styles.noListingsTxt">No listings found by that search</Text> :
+                <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
+            }
+          </View>
         </View>
       </View>
     );
   }
-}
+} -0 - 1

@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "navbar-native": "^1.6.1",
+    "native-base": "^2.8.0",
     "react": "16.5.0",
     "react-native": "0.57.0",
     "react-native-cli": "^2.0.1",
