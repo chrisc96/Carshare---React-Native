@@ -4,7 +4,7 @@ import firebase from 'react-native-firebase';
 import styles from './ride-listing-styles'
 
 import { listingContains } from '../../config/utils';
-import { FindARideHeaderTitle } from './../../config/constants';
+import { RideListingHeaderTitle } from './../../config/constants';
 import { headerTextColour, normalFontWeight } from '../../config/global-styles';
 import Header from '../../components/Header/header';
 import Listing from '../../components/Listing/listing';
@@ -12,7 +12,7 @@ import Listing from '../../components/Listing/listing';
 export default class RideListing extends Component {
 
   static navigationOptions = {
-    headerTitle: FindARideHeaderTitle,
+    headerTitle: RideListingHeaderTitle,
     headerTintColor: headerTextColour,
     headerTitleStyle: {
       fontWeight: normalFontWeight,
@@ -37,7 +37,9 @@ export default class RideListing extends Component {
         year: '',
         firstName: '',
         lastName: '',
-        contactNum: ''
+        contactNum: '',
+        whoWantsToCome: [],
+        whosComing: []
     }
   }
 
@@ -56,8 +58,10 @@ export default class RideListing extends Component {
         if (!userDocument.data()) return;
         const { firstName, lastName, contactNum } = userDocument.data();
 
+        let listingID = firestoreDocument._ref._documentPath._parts[1]
         this.setState({
-          key: firestoreDocument.id,
+          key: listingID,
+          listingID,
           departureDate: departureDate,
           departureTime: departureTime,
           destination: destination,
@@ -69,7 +73,9 @@ export default class RideListing extends Component {
           year: year,
           firstName: firstName,
           lastName: lastName,
-          contactNum: contactNum
+          contactNum: contactNum,
+          whoWantsToCome: whoWantsToCome,
+          whosComing: whosComing
         });
       })
     });
@@ -79,7 +85,7 @@ export default class RideListing extends Component {
     return (
       <View>
         <View>
-          <Listing {...this.state}/>
+          <Listing {...this.state} showRequestToShare={true}/>
         </View>
       </View>
     )

@@ -60,7 +60,7 @@ export default class MyListings extends Component {
         </Header>
 
         <View style={styles.listingsContainer}>
-          <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} />
+          <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} showRequestToShare={false}/>} />
         </View>
 
       </View>

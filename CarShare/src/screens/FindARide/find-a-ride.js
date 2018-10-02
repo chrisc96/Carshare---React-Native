@@ -53,6 +53,10 @@ export default class FindARide extends Component {
     this.firestoreListings.onSnapshot(this.onCollectionUpdate)
   }
 
+  componentWillUnmount() {
+    this.firestoreListings.unsubscribe()
+  }
+
   onCollectionUpdate = (snapshot) => {
     const listingsFromDB = [];
     snapshot.forEach((firestoreDocument) => {
@@ -66,26 +70,32 @@ export default class FindARide extends Component {
           if (!userDocument.data()) return;
           const { firstName, lastName, contactNum } = userDocument.data();
 
-          listingsFromDB.push({
-            key: firestoreDocument.id,
-            firestoreDocument,
-            departureDate,
-            departureTime,
-            destination,
-            meetingPoint,
-            seatsAvailable,
-            storageSpace,
-            make,
-            model,
-            year,
-            firstName,
-            lastName,
-            contactNum
-          });
-
-          this.setState({
-            listings: listingsFromDB
-          });
+          let listingID = firestoreDocument._ref._documentPath._parts[1]
+          
+          if (seatsAvailable > 0) {
+            listingsFromDB.push({
+              key: listingID,
+              listingID,
+              departureDate,
+              departureTime,
+              destination,
+              meetingPoint,
+              seatsAvailable,
+              storageSpace,
+              make,
+              model,
+              year,
+              firstName,
+              lastName,
+              contactNum,
+              whoWantsToCome,
+              whosComing
+            });
+  
+            this.setState({
+              listings: listingsFromDB
+            });
+          }
         })
       })
     });
@@ -148,7 +158,7 @@ export default class FindARide extends Component {
             <FlatList data={this.state.listings} onPress={() => goToHome()} renderItem={({ item }) =>  {
                 return (
                   <TouchableHighlight onPress={() => this.goToListing(item.key)}>
-                    <Listing {...item} />
+                    <Listing {...item} showRequestToShare={false}/>
                   </TouchableHighlight>
                 )
               }}/> :
@@ -157,7 +167,7 @@ export default class FindARide extends Component {
               <FlatList data={this.state.filteredData} renderItem={({ item }) =>  {
                 return (
                   <TouchableHighlight onPress={() => this.goToListing(item.key)}>
-                    <Listing {...item} />
+                    <Listing {...item} showRequestToShare={false}/>
                   </TouchableHighlight>
                 )
               }}/>
