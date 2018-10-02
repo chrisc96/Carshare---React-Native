@@ -1,18 +1,9 @@
 import { StyleSheet, PixelRatio } from 'react-native';
 
 export default styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '50%',
-    borderWidth: 1,
-    borderColor: 'red',
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
   noListingsTxt: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    margin: 10,
+    paddingTop: 10
   },
   searchBarContainer: {
     backgroundColor: "#FFF",
@@ -22,6 +13,7 @@ export default styles = StyleSheet.create({
     paddingRight: 15,
   },
   listingContainer: {
+    width: '100%',
     // borderColor: 'red',
     height: '80%',
     // borderWidth: 1,
