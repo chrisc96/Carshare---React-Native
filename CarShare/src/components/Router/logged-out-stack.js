@@ -4,10 +4,12 @@ import Home from '../../screens/Home/home';
 import Login from '../../screens/Login/login';
 import SignUp from '../../screens/SignUp/sign-up';
 import FindARide from '../../screens/FindARide/find-a-ride';
+import RideListing from '../../screens/RideListing/ride-listing'
 
 const LoggedOutStack = createStackNavigator({
     Home: { screen: Home },
     FindARide: { screen: FindARide },
+    RideListing: { screen: RideListing },
     Login: { screen: Login },
     SignUp: { screen: SignUp }
 },

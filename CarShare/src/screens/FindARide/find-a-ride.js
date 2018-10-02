@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList, Text, TouchableHighlight } from 'react-native';
 import firebase from 'react-native-firebase';
 import styles from './find-a-ride-styles'
 import { SearchBar } from 'react-native-elements'
@@ -109,6 +109,10 @@ export default class FindARide extends Component {
     }
   }
 
+  goToListing(key) {
+    this.props.navigation.navigate('RideListing', {key: key});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -129,10 +133,22 @@ export default class FindARide extends Component {
 
         <View style={styles.listingContainer}>
           {this.state.searchBarEmpty ?
-            <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :
+            <FlatList data={this.state.listings} onPress={() => goToHome()} renderItem={({ item }) =>  {
+                return (
+                  <TouchableHighlight onPress={() => this.goToListing(item.key)}>
+                    <Listing {...item} />
+                  </TouchableHighlight>
+                )
+              }}/> :
             this.state.noData ?
               <Text style="styles.noListingsTxt">No listings found by that search</Text> :
-              <FlatList data={this.state.filteredData} renderItem={({ item }) => <Listing {...item} />} />
+              <FlatList data={this.state.filteredData} renderItem={({ item }) =>  {
+                return (
+                  <TouchableHighlight onPress={() => this.goToListing(item.key)}>
+                    <Listing {...item} />
+                  </TouchableHighlight>
+                )
+              }}/>
           }
         </View>
       </View>

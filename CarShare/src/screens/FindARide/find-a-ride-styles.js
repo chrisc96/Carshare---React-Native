@@ -17,6 +17,7 @@ export default styles = StyleSheet.create({
     // borderColor: 'red',
     height: '80%',
     // borderWidth: 1,
+    paddingRight: 12
   },
   container: {
     flex: 1
