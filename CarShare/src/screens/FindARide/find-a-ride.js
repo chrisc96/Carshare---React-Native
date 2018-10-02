@@ -23,20 +23,6 @@ export default class FindARide extends Component {
 
   constructor(props) {
     super(props);
-
-    this.header = (
-      <Header
-        headerTitle={FindARideHeaderTitle}>
-      </Header>
-    );
-
-    if (this.props.navigation.state) {
-      if (this.props.navigation.state.params) {
-        if (this.props.navigation.state.params.loggedOut) {
-          this.header = null;
-        }
-      }
-    }
     
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
@@ -126,7 +112,11 @@ export default class FindARide extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.header}
+        {!firebase.auth().currentUser ? null :
+          <Header
+            headerTitle={FindARideHeaderTitle}>
+          </Header>
+        }
 
         <SearchBar
           onChangeText={this.onChangeTextDelayed.bind(this)}
@@ -136,6 +126,7 @@ export default class FindARide extends Component {
             backgroundColor: 'white',
           }}
         />
+
         <View style={styles.listingContainer}>
           {this.state.searchBarEmpty ?
             <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} />} /> :

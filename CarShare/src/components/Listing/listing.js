@@ -20,7 +20,6 @@ export default class Listing extends Component {
                 </View>
             )
         }
-
     }
 
     render() {

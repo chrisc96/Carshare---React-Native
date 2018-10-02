@@ -8,9 +8,7 @@ export default styles = StyleSheet.create({
   searchBarContainer: {
     backgroundColor: "#FFF",
     borderBottomColor: 'transparent',
-    borderTopColor: 'transparent',
-    paddingLeft: 15,
-    paddingRight: 15,
+    borderTopColor: 'transparent'
   },
   listingContainer: {
     width: '100%',
@@ -18,4 +16,7 @@ export default styles = StyleSheet.create({
     height: '80%',
     // borderWidth: 1,
   },
+  container: {
+    flex: 1
+  }
 });
