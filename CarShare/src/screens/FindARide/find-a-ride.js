@@ -23,6 +23,20 @@ export default class FindARide extends Component {
 
   constructor(props) {
     super(props);
+
+    this.header = (
+      <Header
+        headerTitle={FindARideHeaderTitle}>
+      </Header>
+    );
+
+    if (this.props.navigation.state) {
+      if (this.props.navigation.state.params) {
+        if (this.props.navigation.state.params.loggedOut) {
+          this.header = null;
+        }
+      }
+    }
     
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
@@ -110,7 +124,7 @@ export default class FindARide extends Component {
   }
 
   goToListing(key) {
-    this.props.navigation.navigate('RideListing', {key: key});
+    this.props.navigation.navigate('RideListing', { key: key });
   }
 
   render() {
@@ -118,11 +132,7 @@ export default class FindARide extends Component {
 
     return (
       <View style={styles.container}>
-        {!firebase.auth().currentUser ? null :
-          <Header
-            headerTitle={FindARideHeaderTitle}>
-          </Header>
-        }
+        {this.header}
 
         <SearchBar
           onChangeText={this.onChangeTextDelayed.bind(this)}
