@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { FormLabel, FormInput, Button, Card } from 'react-native-elements';
 import firebase from 'react-native-firebase';
-import { AddACarHeaderTitle } from './../../config/constants'
-import { headerTextColour, normalFontWeight } from '../../config/global-styles'
+import { AddACarHeaderTitle } from './../../config/constants';
+import { headerTextColour, normalFontWeight } from '../../config/global-styles';
 import styles from './add-a-car-styles';
-import { lightBlueButton } from '../../config/commonStyles';
+import { errorTxtStyles, lightGreenButton } from '../../config/commonStyles';
 
 export default class AddACar extends Component {
 
@@ -25,70 +25,107 @@ export default class AddACar extends Component {
       make: '',
       model: '',
       rego: '',
-      year: ''
+      year: '',
+      addBtnPressed: false,
+      reqBeingSent: false
     }
   }
 
   addCar() {
-    // Add validation here before sending new car
+    this.setState({ addBtnPressed: true })
     
-    this.firestoreCars.add({
-      make: this.state.make,
-      model: this.state.model,
-      rego: this.state.rego,
-      userID: firebase.auth().currentUser.uid,
-      year: this.state.year
-    })
-      .then(response => {
-        this.props.navigation.navigate('PostARide');
+    if (this.formValid()) {
+      this.setState({ reqBeingSent: true });
+      this.firestoreCars.add({
+        make: this.state.make,
+        model: this.state.model,
+        rego: this.state.rego,
+        userID: firebase.auth().currentUser.uid,
+        year: this.state.year
       })
-      .catch(error => {
+        .then(response => {
+          this.props.navigation.navigate('PostARide');
+        })
+        .catch(error => {
+          this.setState({ addBtnPressed: false })
+          this.setState({ reqBeingSent: false })
+        });
+    }
+  }
 
-      });
+  formValid() {
+    return this.state.make.length > 0 &&
+      this.state.model.length > 0 &&
+      this.state.year.length > 0 &&
+      this.state.rego.length > 0
   }
 
   render() {
     return (
-      <View style={styles.form}>
-
-        <ScrollView>
+      <ScrollView>
+        <View style={styles.form}>
           <Card
-            containerStyle={styles.listingCard}
+            containerStyle={styles.addACarCard}
+            titleStyle={styles.addACarCardTitle}
             dividerStyle={styles.divider}
+            title='Add a car'
           >
 
-            <FormLabel>Make:</FormLabel>
+            <FormLabel>MAKE</FormLabel>
             <FormInput
               value={this.state.make}
               placeholder="Please enter your car's make..."
-              onChangeText={text => this.setState({ make: text })} />
+              onChangeText={text => this.setState({ make: text })}
+            />
+            <Text style={[styles.indented, errorTxtStyles]}>
+              {this.state.make.length === 0 && this.state.addBtnPressed ? "Please enter a make" : ""}
+            </Text>
 
-            <FormLabel>Model:</FormLabel>
+            <FormLabel>MODEL</FormLabel>
             <FormInput
               value={this.state.model}
               placeholder="Please enter your car's model..."
-              onChangeText={text => this.setState({ model: text })} />
+              onChangeText={text => this.setState({ model: text })}
+            />
+            <Text style={[styles.indented, errorTxtStyles]}>
+              {this.state.model.length === 0 && this.state.addBtnPressed ? "Please enter a model" : ""}
+            </Text>
 
-            <FormLabel>Car Registration:</FormLabel>
+            <FormLabel>CAR REGISTRATION</FormLabel>
             <FormInput
               value={this.state.rego}
               placeholder="Please enter your car's registration number..."
-              onChangeText={text => this.setState({ rego: text })} />
+              onChangeText={text => this.setState({ rego: text })}
+            />
+            <Text style={[styles.indented, errorTxtStyles]}>
+              {this.state.rego.length === 0 && this.state.addBtnPressed ? "Please enter a registration" : ""}
+            </Text>
 
-            <FormLabel>Year:</FormLabel>
+            <FormLabel>YEAR</FormLabel>
             <FormInput
               value={this.state.year}
               placeholder="Please enter your car's year..."
-              onChangeText={text => this.setState({ year: text })} />
+              onChangeText={text => this.setState({ year: text })}
+            />
+            <Text style={[styles.indented, errorTxtStyles]}>
+              {this.state.year.length === 0 && this.state.addBtnPressed ? "Please enter a year" : ""}
+            </Text>
 
-            <Button
-              title='Submit'
-              buttonStyle={lightBlueButton}
-              onPress={() => this.addCar()} />
+            {this.state.reqBeingSent ?
+              <Button
+                loading
+                buttonStyle={lightGreenButton}
+              /> :
+              <Button
+                title='ADD'
+                onPress={() => this.addCar()}
+                buttonStyle={lightGreenButton}
+              />
+            }
 
           </Card>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     );
   }
 }
