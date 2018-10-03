@@ -11,8 +11,6 @@ export default class Listing extends Component {
     constructor(props) {
         super();
 
-        console.log('test', props)
-
         this.userDetails = null;
         this.storageSpaceString = props.storageSpace ? 'yes' : 'no';
 
@@ -121,7 +119,8 @@ export default class Listing extends Component {
 
     userCanRequest() {
         if (!firebase.auth().currentUser) return true;
-        if (firebase.auth().currentUser.uid === this.props.userDocumentID) return false;
+        console.log('uid', this.props.userDocumentID)
+        if (firebase.auth().currentUser.uid === this.props.userDocumentID) {return false};
 
         let combined = this.props.whosComing.concat(this.props.whoWantsToCome)
 

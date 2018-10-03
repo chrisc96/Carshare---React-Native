@@ -22,7 +22,7 @@ export default class FindARide extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
 
@@ -53,11 +53,12 @@ export default class FindARide extends Component {
           const { firstName, lastName, contactNum } = userDocument.data();
 
           let listingID = firestoreDocument._ref._documentPath._parts[1]
-          
+
           if (seatsAvailable > 0) {
             listingsFromDB.push({
               key: listingID,
               listingID,
+              userDocumentID,
               departureDate,
               departureTime,
               destination,
@@ -73,7 +74,7 @@ export default class FindARide extends Component {
               whoWantsToCome,
               whosComing
             });
-  
+
             this.setState({
               listings: listingsFromDB
             });
@@ -116,7 +117,7 @@ export default class FindARide extends Component {
   }
 
   goToListing(key) {
-    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: true});
+    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: true });
   }
 
   render() {
@@ -135,20 +136,22 @@ export default class FindARide extends Component {
 
         <View style={listingContainer}>
           {this.state.searchBarEmpty ?
-            <FlatList data={this.state.listings} onPress={() => goToHome()} renderItem={({ item }) =>  {
-                return (
-                  <TouchableHighlight onPress={() => this.goToListing(item.key)}>
-                    <Listing {...item} showRequestToShare={false}/>
-                  </TouchableHighlight>
-                )
-              }}/> :
+            <FlatList data={this.state.listings} onPress={() => goToHome()} renderItem={({ item }) => {
+              return (
+                <TouchableHighlight onPress={() => this.goToListing(item.key)}>
+                  <Listing {...item} showRequestToShare={false} />
+                </TouchableHighlight>
+              )
+            }} /> :
             this.state.noData ?
               <Text style="styles.noListingsTxt">No listings found by that search</Text> :
-              <FlatList data={this.state.filteredData} renderItem={({ item }) =>  {
+              <FlatList data={this.state.filteredData} renderItem={({ item }) => {
                 return (
-                  <TouchableHighlight onPress={() => this.goToListing(item.key)}></TouchableHighlight>
+                  <TouchableHighlight onPress={() => this.goToListing(item.key)}>
+                    <Listing {...item} showRequestToShare={false} />
+                  </TouchableHighlight>
                 )
-              }}/>
+              }} />
           }
         </View>
       </View>

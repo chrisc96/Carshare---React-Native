@@ -70,7 +70,9 @@ export default class MyListings extends Component {
         <View style={styles.listingsContainer}>
           <FlatList data={this.state.listings} renderItem={({ item }) => {
             return (
-              <TouchableHighlight onPress={() => this.goToListing(item.key)}></TouchableHighlight>
+              <TouchableHighlight onPress={() => this.goToListing(item.key)}>
+                <Listing {...item} showRequestToShare={false} />
+              </TouchableHighlight>
             )
           }} />
         </View>
