@@ -96,22 +96,21 @@ export default class Listing extends Component {
 
     userCanRequest() {
         if (!firebase.auth().currentUser) return true;
+        if (firebase.auth().currentUser.uid === this.props.userDocumentID) return false;
 
         let combined = this.props.whosComing.concat(this.props.whoWantsToCome)
 
         if (this.userNotRequestedOrTaking(combined)) {
-            return true
+            return true;
         }
-        else {
-            return false
-        }
+        return false;
     }
 
     userNotRequestedOrTaking(combined) {
         let uidLoggedIn = firebase.auth().currentUser.email;
         let idx = combined.findIndex(({ email }) => {
-            return email === uidLoggedIn
+            return email === uidLoggedIn;
         })
-        return idx === -1
+        return idx === -1;
     }
 }

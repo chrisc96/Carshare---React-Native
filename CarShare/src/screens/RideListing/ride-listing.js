@@ -6,7 +6,6 @@ import styles from './ride-listing-styles'
 import { listingContains } from '../../config/utils';
 import { RideListingHeaderTitle } from './../../config/constants';
 import { headerTextColour, normalFontWeight } from '../../config/global-styles';
-import Header from '../../components/Header/header';
 import Listing from '../../components/Listing/listing';
 
 export default class RideListing extends Component {
@@ -39,7 +38,8 @@ export default class RideListing extends Component {
         lastName: '',
         contactNum: '',
         whoWantsToCome: [],
-        whosComing: []
+        whosComing: [],
+        userDocumentID: ''
     }
   }
 
@@ -75,7 +75,8 @@ export default class RideListing extends Component {
           lastName: lastName,
           contactNum: contactNum,
           whoWantsToCome: whoWantsToCome,
-          whosComing: whosComing
+          whosComing: whosComing,
+          userDocumentID: userDocumentID
         });
       })
     });
@@ -83,10 +84,8 @@ export default class RideListing extends Component {
 
   render() {
     return (
-      <View>
-        <View>
-          <Listing {...this.state} showRequestToShare={true} navigation={this.props.navigation}/>
-        </View>
+      <View style={styles.listing}>
+        <Listing {...this.state} showRequestToShare={true} navigation={this.props.navigation}/>
       </View>
     )
   }
