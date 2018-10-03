@@ -85,7 +85,7 @@ export default class RideListing extends Component {
     return (
       <View>
         <View>
-          <Listing {...this.state} showRequestToShare={true}/>
+          <Listing {...this.state} showRequestToShare={true} navigation={this.props.navigation}/>
         </View>
       </View>
     )

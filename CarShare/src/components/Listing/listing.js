@@ -73,11 +73,11 @@ export default class Listing extends Component {
 
     requestToSharePressed = () => {
         if (!firebase.auth().currentUser) {
-            // If a user is not logged in, redirect to login, then back to here
-            
+            // If a user is not logged in, redirect to login
+            this.props.navigation.navigate('Login');
         }
         else {
-            firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).onSnapshot(userInfo => {
+            firebase.firestore().doc('users/' + firebase.auth().currentUser.uid).onSnapshot(userInfo => {
                 let user = {
                     contactNum: userInfo._data.contactNum,
                     firstName: userInfo._data.firstName,

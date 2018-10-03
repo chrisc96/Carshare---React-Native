@@ -8,7 +8,6 @@ import _ from 'lodash'
 import { listingContains } from '../../config/utils';
 import { FindARideHeaderTitle } from './../../config/constants';
 import { headerTextColour, normalFontWeight } from '../../config/global-styles';
-import Header from '../../components/Header/header';
 import Listing from '../../components/Listing/listing';
 
 export default class FindARide extends Component {
@@ -23,20 +22,6 @@ export default class FindARide extends Component {
 
   constructor(props) {
     super(props);
-
-    this.header = (
-      <Header
-        headerTitle={FindARideHeaderTitle}>
-      </Header>
-    );
-
-    if (this.props.navigation.state) {
-      if (this.props.navigation.state.params) {
-        if (this.props.navigation.state.params.loggedOut) {
-          this.header = null;
-        }
-      }
-    }
     
     this.firestoreListings = firebase.firestore().collection('listings');
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
@@ -50,7 +35,7 @@ export default class FindARide extends Component {
   }
 
   componentDidMount() {
-    this.firestoreListings.onSnapshot(this.onCollectionUpdate)
+    this.firestoreListings.onSnapshot(this.onCollectionUpdate);
   }
 
 
@@ -135,12 +120,10 @@ export default class FindARide extends Component {
   }
 
   render() {
-    var listingContainer = firebase.auth().currentUser ? styles.listingContainer : styles.loggedOutListingContainer
+    var listingContainer = this.props.loggedOut ? styles.listingContainer : styles.loggedOutListingContainer
 
     return (
       <View style={styles.container}>
-        {this.header}
-
         <SearchBar
           onChangeText={this.onChangeTextDelayed.bind(this)}
           placeholder='Search Listings'

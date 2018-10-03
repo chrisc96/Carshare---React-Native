@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from 'react-navigation';
 
-import FindARide from '../../screens/FindARide/find-a-ride';
+import FindARideStack from './find-a-ride-stack';
 import MyListings from '../../screens/MyListings/my-listings';
 import RidesImTaking from '../../screens/RidesImTaking/rides-im-taking';
 import PostARideStack from './post-a-ride-stack';
@@ -11,7 +11,7 @@ import { tabNavActive } from '../../config/commonStyles'
 
 export const LoggedInTabs = createBottomTabNavigator({
     FindARide: {
-        screen: FindARide,
+        screen: FindARideStack,
         navigationOptions: () => ({
             title: 'Find a ride',
             tabBarIcon: ({ focused, tintColour }) => (
