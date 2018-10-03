@@ -21,6 +21,10 @@ export default class Listing extends Component {
                 </View>
             )
         }
+
+        this.state = ({
+            reqBeingSent: false
+        })
     }
 
     render() {
@@ -58,11 +62,21 @@ export default class Listing extends Component {
 
     showCorrectButton = () => {
         if (this.userCanRequest()) {
-            return <Button
-                title='Request To Share'
-                onPress={() => this.requestToSharePressed()}
-                buttonStyle={[lightBlueButton]}
-            />
+            return (
+                <View>
+                    {this.state.reqBeingSent ?
+                        <Button
+                          loading
+                          buttonStyle={lightBlueButton}
+                        /> :
+                        <Button
+                            title='Request To Share'
+                            onPress={() => this.requestToSharePressed()}
+                            buttonStyle={[lightBlueButton]}
+                        />
+                    }
+                </View>
+            )
         }
         else {
             return <Button
@@ -77,6 +91,8 @@ export default class Listing extends Component {
             this.props.navigation.navigate('Login');
         }
         else {
+            this.setState({ reqBeingSent: true });
+
             firebase.firestore().doc('users/' + firebase.auth().currentUser.uid).onSnapshot(userInfo => {
                 let user = {
                     contactNum: userInfo._data.contactNum,
@@ -90,6 +106,9 @@ export default class Listing extends Component {
                 firebase.firestore().collection('listings').doc(this.props.listingID).update({
                     whoWantsToCome: this.props.whoWantsToCome
                 })
+                    .then((response) => {
+                        this.setState({ reqBeingSent: false })
+                    })
             })
         }
     }
@@ -97,13 +116,13 @@ export default class Listing extends Component {
     userCanRequest() {
         if (!firebase.auth().currentUser) return true;
         if (firebase.auth().currentUser.uid === this.props.userDocumentID) return false;
-
+        
         let combined = this.props.whosComing.concat(this.props.whoWantsToCome)
 
         if (this.userNotRequestedOrTaking(combined)) {
             return true;
         }
-        return false;
+        return true;
     }
 
     userNotRequestedOrTaking(combined) {
