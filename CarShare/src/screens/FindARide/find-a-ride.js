@@ -116,7 +116,7 @@ export default class FindARide extends Component {
   }
 
   goToListing(key) {
-    this.props.navigation.navigate('RideListing', { key: key });
+    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: true});
   }
 
   render() {
@@ -146,9 +146,7 @@ export default class FindARide extends Component {
               <Text style="styles.noListingsTxt">No listings found by that search</Text> :
               <FlatList data={this.state.filteredData} renderItem={({ item }) =>  {
                 return (
-                  <TouchableHighlight onPress={() => this.goToListing(item.key)}>
-                    <Listing {...item} showRequestToShare={false}/>
-                  </TouchableHighlight>
+                  <TouchableHighlight onPress={() => this.goToListing(item.key)}></TouchableHighlight>
                 )
               }}/>
           }

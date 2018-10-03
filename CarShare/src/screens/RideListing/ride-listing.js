@@ -20,7 +20,6 @@ export default class RideListing extends Component {
 
   constructor(props) {
     super(props);
-    
     this.firestoreListings = firebase.firestore().doc('listings/' + props.navigation.state.params.key);
 
     this.state = {
@@ -85,7 +84,7 @@ export default class RideListing extends Component {
   render() {
     return (
       <View style={styles.listing}>
-        <Listing {...this.state} showRequestToShare={true} navigation={this.props.navigation}/>
+        <Listing {...this.state} showRequestToShare={this.props.navigation.state.params.showRequestToShare} navigation={this.props.navigation}/>
       </View>
     )
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'react-native-firebase';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableHighlight } from 'react-native';
 import styles from './my-listings-styles';
 import Listing from '../../components/Listing/listing';
 import { MyListingsHeaderTitle } from '../../config/constants';
@@ -21,6 +21,10 @@ export default class MyListings extends Component {
     this.firestoreListings.onSnapshot(this.onCollectionUpdate)
   }
 
+  goToListing(key) {
+    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: false });
+  }
+
   onCollectionUpdate = (snapshot) => {
     const listingsFromDB = [];
     snapshot.forEach((firestoreDocument) => {
@@ -30,9 +34,11 @@ export default class MyListings extends Component {
         if (!carDocument.data()) return;
         const { make, model, year } = carDocument.data();
 
+        let listingID = firestoreDocument._ref._documentPath._parts[1]
+
         listingsFromDB.push({
-          key: firestoreDocument.id,
-          firestoreDocument,
+          key: listingID,
+          listingID,
           departureDate,
           departureTime,
           destination,
@@ -41,7 +47,9 @@ export default class MyListings extends Component {
           storageSpace,
           make,
           model,
-          year
+          year,
+          whoWantsToCome,
+          whosComing
         });
 
         this.setState({
@@ -60,7 +68,11 @@ export default class MyListings extends Component {
         </Header>
 
         <View style={styles.listingsContainer}>
-          <FlatList data={this.state.listings} renderItem={({ item }) => <Listing {...item} showRequestToShare={false}/>} />
+          <FlatList data={this.state.listings} renderItem={({ item }) => {
+            return (
+              <TouchableHighlight onPress={() => this.goToListing(item.key)}></TouchableHighlight>
+            )
+          }} />
         </View>
 
       </View>
