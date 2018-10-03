@@ -117,7 +117,7 @@ export default class FindARide extends Component {
   }
 
   goToListing(key) {
-    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: true });
+    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: true});
   }
 
   render() {

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { View, FlatList, Text, TouchableHighlight } from 'react-native';
 import firebase from 'react-native-firebase';
 import styles from './ride-listing-styles'
-
-import { listingContains } from '../../config/utils';
 import { RideListingHeaderTitle } from './../../config/constants';
 import { headerTextColour, normalFontWeight } from '../../config/global-styles';
 import Listing from '../../components/Listing/listing';
@@ -11,7 +9,7 @@ import Listing from '../../components/Listing/listing';
 export default class RideListing extends Component {
 
   static navigationOptions = {
-    headerTitle: RideListingHeaderTitle,
+    title: RideListingHeaderTitle,
     headerTintColor: headerTextColour,
     headerTitleStyle: {
       fontWeight: normalFontWeight,
@@ -21,24 +19,23 @@ export default class RideListing extends Component {
   constructor(props) {
     super(props);
     this.firestoreListings = firebase.firestore().doc('listings/' + props.navigation.state.params.key);
-
     this.state = {
-        key: '',
-        departureDate: '',
-        departureTime: '',
-        destination: '',
-        meetingPoint: '',
-        seatsAvailable: '',
-        storageSpace: '',
-        make: '',
-        model: '',
-        year: '',
-        firstName: '',
-        lastName: '',
-        contactNum: '',
-        whoWantsToCome: [],
-        whosComing: [],
-        userDocumentID: ''
+      key: '',
+      departureDate: '',
+      departureTime: '',
+      destination: '',
+      meetingPoint: '',
+      seatsAvailable: '',
+      storageSpace: '',
+      make: '',
+      model: '',
+      year: '',
+      firstName: '',
+      lastName: '',
+      contactNum: '',
+      whoWantsToCome: [],
+      whosComing: [],
+      userDocumentID: ''
     }
   }
 
@@ -84,8 +81,9 @@ export default class RideListing extends Component {
   render() {
     return (
       <View style={styles.listing}>
-        <Listing {...this.state} showRequestToShare={this.props.navigation.state.params.showRequestToShare} navigation={this.props.navigation}/>
+        <Listing {...this.state} showRequestToShare={this.props.navigation.state.params.showRequestToShare} navigation={this.props.navigation} />
       </View>
     )
   }
+  
 }

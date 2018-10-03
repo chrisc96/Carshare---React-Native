@@ -132,7 +132,6 @@ export default class PostARide extends Component {
   }
 
   render() {
-    console.log(this.state.meetingPoint, this.state.destination)
     var carItems = this.state.cars.map((car, index) => {
       return <Picker.Item key={index + 1} value={car.key} label={car.make + ' ' + car.model} />
     });

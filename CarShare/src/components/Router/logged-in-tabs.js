@@ -3,7 +3,7 @@ import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from 'react-navigation';
 
 import FindARideStack from './find-a-ride-stack';
-import MyListings from '../../screens/MyListings/my-listings';
+import MyListingsStack from './my-listings-stack';
 import RidesImTaking from '../../screens/RidesImTaking/rides-im-taking';
 import PostARideStack from './post-a-ride-stack';
 import ProfileStack from './profile-stack';
@@ -29,7 +29,7 @@ export const LoggedInTabs = createBottomTabNavigator({
         })
     },
     MyListings: {
-        screen: MyListings,
+        screen: MyListingsStack,
         navigationOptions: () => ({
             title: 'My listings',
             tabBarIcon: ({ focused, tintColour }) => (

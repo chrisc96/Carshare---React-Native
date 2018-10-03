@@ -5,8 +5,17 @@ import styles from './my-listings-styles';
 import Listing from '../../components/Listing/listing';
 import { MyListingsHeaderTitle } from '../../config/constants';
 import Header from '../../components/Header/header';
+import { headerTextColour, normalFontWeight } from '../../config/global-styles';
 
 export default class MyListings extends Component {
+
+  static navigationOptions = {
+    title: MyListingsHeaderTitle,
+    headerTintColor: headerTextColour,
+    headerTitleStyle: {
+      fontWeight: normalFontWeight,
+    }
+  }
 
   constructor() {
     super();
@@ -22,7 +31,7 @@ export default class MyListings extends Component {
   }
 
   goToListing(key) {
-    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: false });
+    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: false});
   }
 
   onCollectionUpdate = (snapshot) => {
@@ -63,10 +72,6 @@ export default class MyListings extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header
-          headerTitle={MyListingsHeaderTitle}>
-        </Header>
-
         <View style={styles.listingsContainer}>
           <FlatList data={this.state.listings} renderItem={({ item }) => {
             return (
