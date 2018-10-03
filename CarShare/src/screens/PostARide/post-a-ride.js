@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Picker, ScrollView, Text } from 'react-native';
+import { View, Picker, ScrollView, Text, ActivityIndicator, AsyncStorage } from 'react-native';
 import { FormLabel, FormInput, CheckBox, Card, Button } from 'react-native-elements';
 import firebase from 'react-native-firebase';
 import DatePicker from 'react-native-datepicker';
 import { PostARideHeaderTitle } from './../../config/constants'
 import { headerTextColour, normalFontWeight } from '../../config/global-styles'
 import { errorTxtStyles, lightGreenButton } from '../../config/commonStyles';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 import styles from './post-a-ride-styles';
 
@@ -131,6 +132,7 @@ export default class PostARide extends Component {
   }
 
   render() {
+    console.log(this.state.meetingPoint, this.state.destination)
     var carItems = this.state.cars.map((car, index) => {
       return <Picker.Item key={index + 1} value={car.key} label={car.make + ' ' + car.model} />
     });
@@ -170,24 +172,17 @@ export default class PostARide extends Component {
             />
 
             <FormLabel>MEETING PLACE</FormLabel>
-            <FormInput
-              value={this.state.meetingPoint}
-              placeholder='Please enter meeting point...'
-              onChangeText={text => this.setState({ meetingPoint: text })}
-            />
+            {this.meetingPlaceAutoComplete()}
             <Text style={[styles.indented, errorTxtStyles]}>
               {this.state.meetingPoint.length === 0 && this.state.postBtnPressed ? "Please enter a meeting point" : ""}
             </Text>
 
             <FormLabel>DESTINATION</FormLabel>
-            <FormInput
-              value={this.state.destination}
-              placeholder='Please enter destination...'
-              onChangeText={text => this.setState({ destination: text })}
-            />
+            {this.destinationAutoComplete()}
             <Text style={[styles.indented, errorTxtStyles]}>
               {this.state.destination.length === 0 && this.state.postBtnPressed ? "Please enter a destination" : ""}
             </Text>
+
 
             <FormLabel>DEPARTURE DATE</FormLabel>
             <DatePicker
@@ -226,4 +221,92 @@ export default class PostARide extends Component {
       </ScrollView>
     );
   }
+
+
+  meetingPlaceAutoComplete = () => {
+    return (
+      <GooglePlacesAutocomplete
+        placeholder='Enter a meeting point'
+        minLength={2}
+        autoFocus={false}
+        listViewDisplayed='auto'
+        returnKeyType={'default'}
+        fetchDetails={true}
+        listViewDisplayed={false}
+        onPress={(data, details = null) => {
+          this.setState({ meetingPoint: data.description })
+        }}
+        query={{
+          key: 'AIzaSyBlFRuN8KbZssVHaIcC-gnCIA4pTVrYu_w',
+          language: 'en',
+        }}
+
+        styles={{
+          indented: {
+            margin: 10,
+            paddingLeft: '3%'
+          },
+          textInputContainer: {
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderTopWidth: 0,
+            borderBottomWidth: 0
+          },
+          textInput: {
+            height: 38,
+            color: '#5d5d5d',
+            fontSize: 16
+          },
+          predefinedPlacesDescription: {
+            color: '#1faadb'
+          },
+        }}
+        currentLocation={false}
+        debounce={300}
+      />
+    )
+  }
+
+  destinationAutoComplete = () => {
+    return (
+      <GooglePlacesAutocomplete
+        placeholder='Enter a destination'
+        minLength={2}
+        autoFocus={false}
+        listViewDisplayed='auto'
+        returnKeyType={'default'}
+        fetchDetails={true}
+        listViewDisplayed={false}
+        onPress={(data, details = null) => {
+          this.setState({ destination: data.description })
+        }}
+        query={{
+          key: 'AIzaSyBlFRuN8KbZssVHaIcC-gnCIA4pTVrYu_w',
+          language: 'en',
+        }}
+
+        styles={{
+          indented: {
+            margin: 10,
+            paddingLeft: '3%'
+          },
+          textInputContainer: {
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderTopWidth: 0,
+            borderBottomWidth: 0
+          },
+          textInput: {
+            height: 38,
+            color: '#5d5d5d',
+            fontSize: 16
+          },
+          predefinedPlacesDescription: {
+            color: '#1faadb'
+          },
+        }}
+        currentLocation={false}
+        debounce={300}
+      />
+    )
+  }
+
 }

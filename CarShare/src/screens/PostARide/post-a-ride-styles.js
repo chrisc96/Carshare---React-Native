@@ -28,5 +28,18 @@ export default styles = StyleSheet.create({
   },
   datePicker: {
     width: '93%'
-  }
+  },
+  textInputContainer: {
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderTopWidth: 0,
+    borderBottomWidth: 0
+  },
+  textInput: {
+    height: 38,
+    color: '#5d5d5d',
+    fontSize: 16
+  },
+  predefinedPlacesDescription: {
+    color: '#1faadb'
+  },
 });
