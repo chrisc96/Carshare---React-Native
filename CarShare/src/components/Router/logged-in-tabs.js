@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 
 import FindARideStack from './find-a-ride-stack';
 import MyListingsStack from './my-listings-stack';
-import RidesImTaking from '../../screens/RidesImTaking/rides-im-taking';
+import RidesTakingStack from './rides-taking-stack';
 import PostARideStack from './post-a-ride-stack';
 import ProfileStack from './profile-stack';
 import { tabNavActive } from '../../config/commonStyles'
@@ -38,7 +38,7 @@ export const LoggedInTabs = createBottomTabNavigator({
         })
     },
     RidesImTaking: {
-        screen: RidesImTaking,
+        screen: RidesTakingStack,
         navigationOptions: () => ({
             title: 'My Rides',
             tabBarIcon: ({ focused, tintColour }) => (

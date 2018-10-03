@@ -85,5 +85,4 @@ export default class RideListing extends Component {
       </View>
     )
   }
-  
 }

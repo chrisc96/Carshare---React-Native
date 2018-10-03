@@ -81,7 +81,6 @@ export default class MyListings extends Component {
             )
           }} />
         </View>
-
       </View>
     );
   }
