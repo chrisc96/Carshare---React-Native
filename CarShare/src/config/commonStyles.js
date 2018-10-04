@@ -2,10 +2,17 @@ export const errorTxtStyles = {
     color: 'red',
     marginTop: 0,
 }
+
+export const lightRedButton = {
+    backgroundColor: '#FF0000',
+    height: 45
+}
+
 export const lightGreenButton = {
     backgroundColor: '#84d140',
     height: 45
 }
+
 export const lightBlueButton = {
     backgroundColor: '#03A9F4',
     height: 45

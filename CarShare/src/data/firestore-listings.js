@@ -104,6 +104,7 @@ export const getListing = (key, listing) => {
 
 export const getRidesTaking = (uid, listings) => {
   const firestoreListings = firebase.firestore().collection('listings');
+  
   firestoreListings.onSnapshot((snapshot) => {
     let listingsFromDB = [];
     snapshot.forEach((firestoreDocument) => {
@@ -175,6 +176,23 @@ export const addListing = (uid, carDocumentID, meetingPoint, destination, depart
   })
     .then((response) => success(true))
     .catch((error) => success(false));
+}
+
+export const updateListing = (listing, success)  => {
+  const firestoreListing = firebase.firestore().doc('listings/' + listing.listingID);
+
+  firestoreListing.update({
+    departureDate: listing.departureDate,
+    departureTime: listing.departureTime,
+    destination: listing.destination,
+    meetingPoint: listing.meetingPoint,
+    seatsAvailable: listing.seatsAvailable,
+    storageSpace: listing.storageSpace,
+    whoWantsToCome: listing.whoWantsToCome,
+    whosComing: listing.whosComing
+  })
+  .then((response) => success(true))
+  .catch((error) => success(false))
 }
 
 export const addUserToRide = (currentUser, listingID, whoWantsToCome, success) => {

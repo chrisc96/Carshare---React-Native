@@ -2,10 +2,12 @@ import { createStackNavigator } from 'react-navigation';
 
 import MyListings from '../../screens/my-listings';
 import RideListing from '../../screens/ride-listing';
+import ReviewShareRequest from '../../screens/review-share-request';
 
 const MyListingsStack = createStackNavigator ({
     MyListings: {screen: MyListings},
-    RideListing: {screen: RideListing}
+    RideListing: {screen: RideListing},
+    ReviewShareRequest: {screen:ReviewShareRequest}
 },
 {
     navigationOptions: {

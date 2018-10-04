@@ -55,10 +55,23 @@ export default class Listing extends Component {
                     </View>
 
                     {this.props.showRequestToShare ? this.showCorrectButton() : null}
+                    {this.props.showReviewRequests ?
+                        <Button
+                            title='Review requests'
+                            onPress={() => this.goToReviewRequestToShare()}
+                            buttonStyle={[lightBlueButton]}
+                            containerViewStyle={{paddingTop: 10}}
+                        /> 
+                        : null
+                    }
                 </Card>
                 <Text>{"\n"}</Text>
             </View>
         )
+    }
+
+    goToReviewRequestToShare = () => {
+        this.props.navigation.navigate('ReviewShareRequest', { listing: this.props })
     }
 
     showCorrectButton = () => {

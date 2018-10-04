@@ -14,8 +14,11 @@ export default class MyListings extends Component {
     }
   }
 
-  goToListing(key) {
-    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: false});
+  goToListing(key, index) {
+    var listing = this.state.listings[index];
+    var showReviewRequests = listing.whoWantsToCome.length !== 0;
+
+    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: false, showReviewRequests: showReviewRequests});
   }
 
   componentDidMount() {
@@ -28,10 +31,10 @@ export default class MyListings extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.listingsContainer}>
-          <FlatList data={this.state.listings} renderItem={({ item }) => {
+          <FlatList data={this.state.listings} renderItem={({ item, index }) => {
             return (
-              <TouchableHighlight onPress={() => this.goToListing(item.key)}>
-                <Listing {...item} showRequestToShare={false} />
+              <TouchableHighlight onPress={() => this.goToListing(item.key, index)}>
+                <Listing {...item} navigation={this.props.navigation} showRequestToShare={false} />
               </TouchableHighlight>
             )
           }} />
