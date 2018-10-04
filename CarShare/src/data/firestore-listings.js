@@ -178,7 +178,7 @@ export const addListing = (uid, carDocumentID, meetingPoint, destination, depart
     .catch((error) => success(false));
 }
 
-export const updateListing = (listing, success)  => {
+export const updateListing = (listing, seatsAvailable, success)  => {
   const firestoreListing = firebase.firestore().doc('listings/' + listing.listingID);
 
   firestoreListing.update({
@@ -186,7 +186,7 @@ export const updateListing = (listing, success)  => {
     departureTime: listing.departureTime,
     destination: listing.destination,
     meetingPoint: listing.meetingPoint,
-    seatsAvailable: listing.seatsAvailable,
+    seatsAvailable: seatsAvailable,
     storageSpace: listing.storageSpace,
     whoWantsToCome: listing.whoWantsToCome,
     whosComing: listing.whosComing

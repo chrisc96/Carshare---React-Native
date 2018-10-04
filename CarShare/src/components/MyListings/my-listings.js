@@ -16,7 +16,7 @@ export default class MyListings extends Component {
 
   goToListing(key, index) {
     var listing = this.state.listings[index];
-    var showReviewRequests = listing.whoWantsToCome.length !== 0;
+    var showReviewRequests = listing.whoWantsToCome.length !== 0 && listing.seatsAvailable > 0;
 
     this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: false, showReviewRequests: showReviewRequests});
   }

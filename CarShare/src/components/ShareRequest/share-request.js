@@ -40,12 +40,12 @@ export default class ShareRequest extends Component {
 
     acceptRequest(index) {
       var requester = this.props.listing.whoWantsToCome[index]
-      
-      this.props.listing.seatsAvailable = (this.props.listing.seatsAvailable - 1);
+
+      var seatsAvailable = parseInt(this.props.listing.seatsAvailable, 10) - 1;
       this.props.listing.whosComing.push(requester)
       this.props.listing.whoWantsToCome.splice(index, 1)
 
-      firestoreListings.updateListing(this.props.listing, (success) => {
+      firestoreListings.updateListing(this.props.listing, seatsAvailable, (success) => {
         if(success) {
             this.props.listing.navigation.navigate('MyListings')
         }
