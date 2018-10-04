@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import { View, ImageBackground } from 'react-native';
-import Router from './components/Router/router';
 import styles from './app-styles'
-import firebase from 'react-native-firebase';
+
+import Router from './components/Navigation/router';
+import * as auth from './data/auth';
 
 export default class App extends Component {
 
   componentDidMount() {
-    if (firebase.auth().currentUser) {
-      firebase.auth().signOut();
+    auth.logOut();
+
+    this.state={
+      user: null
     }
+
+    this.checkLoggedIn()
   }
+
+  checkLoggedIn() {
+    auth.checkLoggedIn((user) => {
+      this.setState({user: user})
+    })
+}
 
   render() {
     return (
       <View style={styles.container}>
         <ImageBackground source={require('./assets/imgs/background.png')} style={styles.bgImage}>
-          <Router />
+          <Router screenProps={this.state}/>
         </ImageBackground>
       </View>
     );
