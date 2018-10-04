@@ -100,6 +100,62 @@ export const getListing = (key, listing) => {
     });
   })
 }
+
+
+export const getRidesTaking = (uid, listings) => {
+  const firestoreListings = firebase.firestore().collection('listings');
+  firestoreListings.onSnapshot((snapshot) => {
+    let listingsFromDB = [];
+    snapshot.forEach((firestoreDocument) => {
+      const { departureDate, departureTime, destination, meetingPoint, seatsAvailable, storageSpace, userDocumentID, carDocumentID, whoWantsToCome, whosComing } = firestoreDocument.data();
+
+      firebase.firestore().doc('cars/' + carDocumentID).onSnapshot((carDocument) => {
+        if (!carDocument.data()) return;
+        const { make, model, year } = carDocument.data();
+
+        let listingID = firestoreDocument._ref._documentPath._parts[1]
+
+        listingsFromDB.push({
+          key: listingID,
+          listingID,
+          departureDate,
+          departureTime,
+          destination,
+          meetingPoint,
+          seatsAvailable,
+          storageSpace,
+          make,
+          model,
+          year,
+          userDocumentID,
+          whoWantsToCome,
+          whosComing
+        });
+
+        listingsFromDB = listingsFromDB.filter(listing => {
+          const userPoster = listing.userDocumentID;
+          let iDidntPostThisListing = true;
+          let comingOnThisListing = false;
+
+          listing.whosComing.forEach(el => {
+            if (userPoster === el.uid) {
+              iDidntPostThisListing = false
+              return
+            }
+
+            if (el.uid === uid) {
+              comingOnThisListing = true
+              return
+            }
+          })
+          return comingOnThisListing && iDidntPostThisListing
+        })
+
+        listings(listingsFromDB);
+      })
+    })
+  })
+}
     
 export const addListing = (uid, carDocumentID, meetingPoint, destination, departureDate, departureTime, noSeats, storageAvail, success) => {
   const firestoreListings = firebase.firestore().collection('listings');

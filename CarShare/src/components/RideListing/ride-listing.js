@@ -57,7 +57,7 @@ export default class RideListing extends Component {
   render() {
     return (
       <View style={styles.listing}>
-        <Listing {...this.state} showRequestToShare={true} navigation={this.props.navigation} screenProps={this.props.screenProps}/>
+        <Listing {...this.state} navigation={this.props.navigation} screenProps={this.props.screenProps} showRequestToShare={this.props.navigation.state.params.showRequestToShare}/>
       </View>
     )
   }

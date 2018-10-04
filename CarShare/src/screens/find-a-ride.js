@@ -15,7 +15,7 @@ export default class FindARide extends Component {
 
   render() {
     return (
-      <FindARideComponent navigation={this.props.navigation} screenProps={this.props.screenProps} screenProps={this.props.screenProps}/>
+      <FindARideComponent navigation={this.props.navigation} screenProps={this.props.screenProps}/>
     )
   }
 }

@@ -10,6 +10,7 @@ export default class Listing extends Component {
 
     constructor(props) {
         super();
+
         this.userDetails = null;
         this.storageSpaceString = props.storageSpace ? 'yes' : 'no';
 
@@ -66,13 +67,15 @@ export default class Listing extends Component {
                 <View>
                     {this.state.reqBeingSent ?
                         <Button
-                          loading
-                          buttonStyle={lightBlueButton}
+                            loading
+                            buttonStyle={lightBlueButton}
+                            containerViewStyle={{paddingTop: 10}}
                         /> :
                         <Button
                             title='Request To Share'
                             onPress={() => this.requestToSharePressed()}
                             buttonStyle={[lightBlueButton]}
+                            containerViewStyle={{paddingTop: 10}}
                         />
                     }
                 </View>
@@ -81,6 +84,7 @@ export default class Listing extends Component {
         else {
             return <Button
                 title='Request To Share'
+                containerViewStyle={{paddingTop: 10}}
             />
         }
     }
@@ -110,7 +114,7 @@ export default class Listing extends Component {
         if (this.userNotRequestedOrTaking(combined)) {
             return true;
         }
-        return true;
+        return false;
     }
 
     userNotRequestedOrTaking(combined) {

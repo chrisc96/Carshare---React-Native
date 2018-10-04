@@ -5,14 +5,14 @@ import { SearchBar } from 'react-native-elements'
 import _ from 'lodash'
 
 import { listingContains } from '../../config/utils';
-import Listing from '../Listing/listing';
+import Listing from '../../components/Listing/listing';
 import * as firestoreListings from '../../data/firestore-listings';
 
 export default class FindARide extends Component {
 
-  constructor() {
-    super();
-    
+  constructor(props) {
+    super(props);
+
     this.onChangeTextDelayed = _.debounce(this.searchBarChanged, 350);
 
     this.state = {
@@ -62,13 +62,13 @@ export default class FindARide extends Component {
   }
 
   goToListing(key) {
-    this.props.navigation.navigate('RideListing', { key: key });
+    this.props.navigation.navigate('RideListing', { key: key, showRequestToShare: true});
   }
 
   render() {
     var listingContainer = this.props.loggedOut ? styles.listingContainer : styles.loggedOutListingContainer
+
     return (
-      
       <View style={styles.container}>
         <SearchBar
           onChangeText={this.onChangeTextDelayed.bind(this)}
@@ -84,7 +84,7 @@ export default class FindARide extends Component {
             <FlatList data={this.state.listings} onPress={() => goToHome()} renderItem={({ item }) => {
               return (
                 <TouchableHighlight onPress={() => this.goToListing(item.key)}>
-                  <Listing {...item} showRequestToShare={false}/>
+                  <Listing {...item} showRequestToShare={false} />
                 </TouchableHighlight>
               )
             }} /> :
@@ -93,7 +93,7 @@ export default class FindARide extends Component {
               <FlatList data={this.state.filteredData} renderItem={({ item }) => {
                 return (
                   <TouchableHighlight onPress={() => this.goToListing(item.key)}>
-                    <Listing {...item} showRequestToShare={false} />
+                    <Listing {...item} showRequestToShare={false}/>
                   </TouchableHighlight>
                 )
               }} />
