@@ -85,7 +85,7 @@ export default class EditProfile extends Component {
                     {this.state.reqBeingSent ?
                         <Button
                             loading
-                            buttonStyle={styles.updateBtn}
+                            buttonStyle={lightGreenButton}
                         /> :
                         <Button
                             title='UPDATE'

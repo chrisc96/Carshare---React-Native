@@ -129,12 +129,12 @@ export default class SignUp extends Component {
                         {this.state.reqBeingSent ?
                             <Button
                                 loading
-                                buttonStyle={lightGreenButton}
+                                buttonStyle={lightBlueButton}
                             /> :
                             <Button
                                 title="SIGN UP"
                                 onPress={() => this.signUp()}
-                                buttonStyle={lightGreenButton}
+                                buttonStyle={lightBlueButton}
                             />
                         }
                     </Card>

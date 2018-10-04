@@ -71,7 +71,7 @@ export default class Listing extends Component {
     }
 
     goToReviewRequestToShare = () => {
-        this.props.navigation.navigate('ReviewShareRequest', { listing: this.props })
+        this.props.navigation.navigate('ReviewShareRequests', { listing: this.props })
     }
 
     showCorrectButton = () => {
@@ -87,7 +87,7 @@ export default class Listing extends Component {
                         <Button
                             title='Request To Share'
                             onPress={() => this.requestToSharePressed()}
-                            buttonStyle={[lightBlueButton]}
+                            buttonStyle={lightBlueButton}
                             containerViewStyle={{paddingTop: 10}}
                         />
                     }

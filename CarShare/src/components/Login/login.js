@@ -94,13 +94,13 @@ export default class Login extends Component {
                     {this.state.loggedInPressed ?
                         <Button
                             loading
-                            buttonStyle={lightBlueButton}
+                            buttonStyle={lightGreenButton}
                         />
                         :
                         <Button
                             title="LOGIN"
                             onPress={() => this.login()}
-                            buttonStyle={lightBlueButton}
+                            buttonStyle={lightGreenButton}
                         />
                     }
 
@@ -111,7 +111,7 @@ export default class Login extends Component {
                     <Button
                         title="SIGN UP"
                         onPress={() => this.goToSignUp()}
-                        buttonStyle = {lightGreenButton}
+                        buttonStyle = {lightBlueButton}
                     />
                 </Card>
             </View>
