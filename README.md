@@ -1,7 +1,7 @@
 # Carshare-React-Native
 
 * CarShare helps people to locate other people wanting to carpool.
-* We're using React-Native, Firebase and some Web APIs.
+* We're using React-Native, Firebase, Google Maps Autocomplete and a number of other npm modules
 
 ## Current Progress
 
