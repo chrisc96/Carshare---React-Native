@@ -4,7 +4,7 @@ import { FormLabel, FormInput, Card, Button } from 'react-native-elements';
 import { NavigationActions, StackActions } from 'react-navigation';
 
 import styles from './sign-up-styles';
-import { errorTxtStyles, lightGreenButton } from '../../config/commonStyles';
+import { errorTxtStyles, lightBlueButton } from '../../config/commonStyles';
 import * as auth from '../../data/auth';
 import * as firestoreUsers from '../../data/firestore-users';
 

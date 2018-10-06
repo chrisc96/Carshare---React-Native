@@ -13,13 +13,16 @@ export default class PostARide extends Component {
   constructor() {
     super();
 
+    var currentDateString = this.getCurrentDate();
+    var currentTimeString = this.getCurrentTime();
+
     this.state = {
       storageAvail: false,
       noSeats: 0,
       meetingPoint: '',
       destination: '',
-      departureDate: '2018-10-05',
-      departureTime: '07:28',
+      departureDate: currentDateString,
+      departureTime: currentTimeString,
       cars: [],
       selectedCarID: '',
       postBtnPressed: false,
@@ -31,6 +34,23 @@ export default class PostARide extends Component {
     firestoreCars.getCars(this.props.screenProps.user.uid, (cars) => {
       this.setState({ cars: cars })
     });
+  }
+
+  getCurrentDate() {
+    var currentDateTime = new Date();
+    var day = currentDateTime.getDate();
+    var month = currentDateTime.getMonth() + 1;
+    var year = currentDateTime.getFullYear();
+
+    return year + '-' + month + '-' + day;
+  }
+
+  getCurrentTime() {
+    var currentDateTime = new Date();
+    var minutes = currentDateTime.getMinutes();
+    var hours = currentDateTime.getHours();
+
+    return hours + ':' + minutes;
   }
 
   addListing() {
